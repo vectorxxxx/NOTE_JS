@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			// alert("I'm inner script.");
+			/*
+				多行注释...
+				多行注释...
+				多行注释...
+			 */
+			// 单行注释
+			
+			// var a = Number.MIN_VALUE * Number.MIN_VALUE;
+			// console.log(a);
+			// console.log(typeof a);
+			
+			// var a2 = 0.1 + 0.2;
+			// console.log(a2);
+			
+			// var a3 = null;
+			// console.log(a3);
+			// console.log(typeof a3);
+			
+			// var a4;
+			// console.log(a4);
+			// console.log(typeof a4);
+			
+			// **方式一：调用被转换数据类型的`toString()`方法**
+			// Number转换为String
+			// var a1 = 123;
+			// var b1 = a1.toString();
+			// console.log(typeof a1);
+			// console.log(typeof b1);
+			// Boolean转换为String
+			// var a2 = true;
+			// var b2 = a2.toString();
+			// console.log(typeof a2);
+			// console.log(typeof b2);
+			// Null转换为String
+			// var a3 = null;
+			// var b3 = a3.toString();
+			// console.log(typeof a3); 
+			// console.log(typeof b3);
+			// Undefined转换为String
+			// var a4 = undefined;
+			// var b4 = a4.toString();
+			// console.log(typeof a4); 
+			// console.log(typeof b4);
+			
+			// **方式二：调用`String()`函数，并将被转换的数据作为参数传递给函数**
+			// Number转换为String
+			var a1 = 123;
+			var b1 = String(a1);
+			console.log(typeof a1);
+			console.log(typeof b1);
+			// Boolean转换为String
+			var a2 = true;
+			var b2 = String(a2);
+			console.log(typeof a2);
+			console.log(typeof b2);
+			// Null转换为String
+			var a3 = null;
+			var b3 = String(a3);
+			console.log(typeof a3); 
+			console.log(typeof b3);
+			// Undefined转换为String
+			var a4 = undefined;
+			var b4 = String(a4);
+			console.log(typeof a4); 
+			console.log(typeof b4);
+		</script>
+		<script src="/js/script.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button onclick="alert('Fuck! Do not touch me!')">Try to click me</button>
+		<a href="javascript:alert('Hey, what\'s up, man?')">Try to click me</a>
+			
+	</body>
+</html>
