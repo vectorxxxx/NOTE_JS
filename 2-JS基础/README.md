@@ -139,15 +139,15 @@ console.log(age);
 
 ### 其他不建议使用的标识符
 
-| boolean     | byte       | short              | char               | int         | long      |
-| ----------- | ---------- | ------------------ | ------------------ | ----------- | --------- |
-| float       | double     | String             | Boolean            | Number      | Object    |
-| Date        | Array      | Math               | Error              | SyntaxError | EvalError |
-| TypeError   | URIError   | RangeError         | ReferenceError     | encodeURI   | decodeURI |
-| parselnt    | parseFloat | NaN                | isNaN              | undefined   | transient |
-| throws      | native     | goto               | eval               | JSON        | Infinity  |
-| arguments   | isFinite   | volatile           | abstract           | RegExp      | Function  |
-| synchronize | final      | encodeURICOmponent | decodeURIComponent |             |           |
+| **boolean**     | **byte**       | **short**              | **char**               | **int**         | **long**      |
+| --------------- | -------------- | ---------------------- | ---------------------- | --------------- | ------------- |
+| **float**       | **double**     | **String**             | **Boolean**            | **Number**      | **Object**    |
+| **Date**        | **Array**      | **Math**               | **Error**              | **SyntaxError** | **EvalError** |
+| **TypeError**   | **URIError**   | **RangeError**         | **ReferenceError**     | **encodeURI**   | **decodeURI** |
+| **parselnt**    | **parseFloat** | **NaN**                | **isNaN**              | **undefined**   | **transient** |
+| **throws**      | **native**     | **goto**               | **eval**               | **JSON**        | **Infinity**  |
+| **arguments**   | **isFinite**   | **volatile**           | **abstract**           | **RegExp**      | **Function**  |
+| **synchronize** | **final**      | **encodeURICOmponent** | **decodeURIComponent** |                 |               |
 
 JS底层保存标识符时实际上是采用的Unicode编码，所以理论上讲，所有的utf-8中含有的内容都可以作为标识符
 
@@ -296,9 +296,9 @@ console.log(typeof a4); // undefind
 
 类型转换主要指，将其他的数据类型，转换为`String`、`Number`、`Boolean`
 
-### 其他数据类型转换为String
+### 7.1、其他数据类型转换为String
 
-**方式一：调用被转换数据类型的`toString()`方法**
+#### 方式一：调用被转换数据类型的toString()方法
 
 该方法不会影响到原变量，它会将转换的结果返回
 
@@ -330,7 +330,7 @@ console.log(typeof a4);
 console.log(typeof b4);
 ```
 
-**方式二：调用`String()`函数，并将被转换的数据作为参数传递给函数**
+#### 方式二：调用String()函数，并将被转换的数据作为参数传递给函数
 
 使用`String()`函数做强制类型转换时，对于`Number`和`Boolean`实际上就是调用的`toString()`方法
 
@@ -360,5 +360,161 @@ var a4 = undefined;
 var b4 = String(a4);
 console.log(typeof a4); // undefined
 console.log(typeof b4); // string
+```
+
+### 7.2、其他数据类型转换为Number
+
+#### 方式一：使用Number()函数
+
+- 字符串 --> 数字
+  - 如果是纯数字的字符串，则直接将其转换为数字
+  - 如果字符串中有非数字的内容，则转换为`NaN`
+  - 如果字符串是一个空串或者是一个全是空格的字符串，则转换为`0`
+  
+  ```javascript
+  // **转换方式一：使用Number()函数**
+  // 纯数字的字符串
+  var a1 = '123';         
+  a1 = Number(a1);
+  console.log(typeof a1); // number
+  console.log(a1); 	    // 123
+  // 非数字的内容
+  // var a2 = 'abc';         
+  var a2 = undefined;
+  a2 = Number(a2);
+  console.log(typeof a2); // number
+  console.log(a2);        // NaN 
+  // 空串
+  // var a3 = ' ';      
+  var a3 = null;       
+  a3 = Number(a3);        
+  console.log(typeof a3); // number
+  console.log(a3);        // 0
+  ```
+
+- 布尔 --> 数字
+  - `true`转成`1`
+  - `false`转成`0`
+  
+  ```javascript
+  var a4 = true;
+  a4 = Number(a4);
+  console.log(typeof a4); // number
+  console.log(a4);        // 1
+  var a5 = false;
+  a5 = Number(a5);
+  console.log(typeof a5); // number
+  console.log(a5);        // 0
+  ```
+
+#### 方式二：专门用来对付字符串
+
+- `parseInt()`把一个字符串转换为一个整数：可以将一个字符串中的有效整数部分取出来，然后转换为Number
+- `parseFloat()`把一个字符串转换为一个浮点数：可以将一个字符串中的有效小数部分取出来，然后转换为Number
+- 如果对非String使用`parseInt()`或`parseFloat()`，它会先将其转换为String，然后再操作
+
+```javascript
+var a1 = "123";
+a1 = parseInt(a1);
+console.log(typeof a1); // number
+console.log(a1);        // 123
+var a2 = "123.456";
+a2 = parseInt(a2);
+console.log(typeof a2); // number
+console.log(a2);        // 123
+var a3 = "123px";
+a3 = parseInt(a3);
+console.log(typeof a3); // number
+console.log(a3);        // 123 
+// var a4 = null;
+// var a4 = undefined;
+// var a4 = '';
+// var a4 = 'abc';
+// var a4 = true;
+var a4 = false;
+a4 = parseInt(a4);
+console.log(typeof a4); // number
+console.log(a4);        // NaN
+```
+
+### 7.3、其他数据类型转换为Boolean
+
+#### 方式一：使用`Boolean()`函数
+
+- 数字-—->布尔
+  - 除了`0`和`NaN`，其余的都是`true`
+- 字符串-—->布尔
+  - 除了空串，其余的都是`true`
+- `null`和`undefined`都会转换为`false`
+- 对象也会转换为`true`
+
+```javascript
+// - 数字-—->布尔
+//   - 除了`0`和`NaN`，其余的都是`true`
+// var a1 = 0;
+var a1 = NaN;
+a1 = Boolean(a1);
+console.log(a1); // false
+var a2 = 123;
+a2 = Boolean(a2);
+console.log(a2); // true
+// - 字符串-—->布尔
+//   - 除了空串，其余的都是`true`
+var a3 = "123";
+a3 = Boolean(a3);
+console.log(a3); // true
+var a4 = " ";
+a4 = Boolean(a4);
+console.log(a4); // true
+var a5 = "";
+a5 = Boolean(a5);
+console.log(a5); // false
+// - `null`和`undefined`都会转换为`false`
+// var a6 = null;
+var a6 = undefined;
+a6 = Boolean(a6);
+console.log(a6); // false
+```
+
+#### 方式二：隐式类型转换
+
+为任意的数据类型做两次非运算，即可将其转换为布尔值（下一节会介绍）
+
+```javascript
+var a = "123";
+var b = !!a;
+console.log("a="+a+",b="+b); // a=true,b=true
+```
+
+
+
+## 8、补充
+
+在js中，如果需要表示16进制的数字，则需要以`0x`开头
+
+如果需要表示8进制的数字，则需要以`0`开头
+
+如果需要表示2进制的数字，则需要以`0b`开头，但是不是所有的浏览器都支持
+
+```javascript
+// 十六进制数字
+var a = 0x10;
+console.log(a); // 16
+a = 0xff;
+console.log(a); // 255
+a = 0xCafe;
+console.log(a); // 51966
+a = "0x70";
+a = parseInt(a,16);
+console.log(a); // 112
+// 八进制数字
+a = 070;
+console.log(a); // 56
+a = "070";
+a = parseInt(a,8);
+console.log(a); // 56
+// 二进制数字
+a = 0b10;
+console.log(a); // 2
 ```
 

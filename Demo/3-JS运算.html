@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JS运算</title>
+		<script type="text/javascript">
+			// +
+			// var a1 = 123 + 456;
+			// console.log(a1); // 579
+			// var a2 = "123" + "456";
+			// console.log(a2); // 123456
+			// var a3 = "123" + 456;
+			// console.log(a3); // 123456
+			// var a4 = 123 + "456";
+			// console.log(a4); // 123456
+			// var a5 = 123 + true;
+			// console.log(a5); // 124
+			// var a6 = 123 + "";
+			// console.log(a6); // 123
+			// var a7 = 123 + null;
+			// console.log(a7); // 123
+			// var a8 = 123 + undefined;
+			// console.log(a8); // NaN
+			// var a9 = 123 + NaN;
+			// console.log(a9); // NaN
+			// var a10 = "123" + NaN;
+			// console.log(a10); // 123NaN
+			
+			// -
+			// var b1 = 456 - 123;
+			// console.log(b1); // 333
+			// var b2 = 456 - "123";
+			// console.log(b2); // 333
+			// var b3 = 456 - true;
+			// console.log(b3); // 455
+			// var b4 = 456 - "";
+			// console.log(b4); // 456
+			// var b5 = 456 - null;
+			// console.log(b5); // 456
+			// var b6 = 456 - "abc";
+			// console.log(b6); // NaN
+			// var b7 = 456 - NaN;
+			// console.log(b7); // NaN
+			// var b8 = 456 - undefined;
+			// console.log(b8); // NaN
+			
+			// 一元运算符
+			// var a = "10";
+			// var result = +a;
+			// console.log(typeof result);    // number
+			// console.log("result="+result); // result=10
+			// result = -a;
+			// console.log("result="+result); // result=-10
+			// a = true;
+			// result = +a;
+			// console.log("result="+result); // result=1
+			// a = "";
+			// result = +a;
+			// console.log("result="+result); // result=0
+			// a = null;
+			// result = +a;
+			// console.log("result="+result); // result=0
+			// a = undefined;
+			// result = +a;
+			// console.log("result="+result); // result=NaN
+			// a = NaN;
+			// result = +a;
+			// console.log("result="+result); // result=NaN
+			
+			// // 自增
+			// var a,b;
+			// a = 1;
+			// b = a++;
+			// console.log("a++ = " + b + ", a = " + a); // a++ = 1, a = 2
+			// a = 1;
+			// b = ++a;
+			// console.log("++a = " + b + ", a = " + a); // ++a = 2, a = 2
+			// // 自减
+			// var a,b;
+			// a = 1;
+			// b = a--;
+			// console.log("a-- = " + b + ", a = " + a); // a-- = 1, a = 0
+			// a = 1;
+			// b = --a;
+			// console.log("--a = " + b + ", a = " + a); // --a = 0, a = 0
+			// // 练习
+			// a = 10;
+			// b = a++ + ++a + a; // 10 + 12 + 12;
+			// console.log('a = ' + a + ', b = ' + b); // a = 12, b = 34
+			
+			// 非运算
+			// var a,b;
+			// a = true;
+			// b = !a;
+			// console.log("a="+a+",b="+b); // a=true,b=false
+			// b = !!a;
+			// console.log("a="+a+",b="+b); // a=true,b=true
+			// a = "123";
+			// b = !!a;
+			// console.log("a="+a+",b="+b); // a=true,b=true
+			// 与运算
+			// var a;
+			// a = true && true;   // true
+			// console.log(a);
+			// a = true && false;  // false
+			// console.log(a);
+			// a = false && true;  // false
+			// console.log(a);
+			// a = false && false; // false
+			// console.log(a);
+			// 或运算
+			// var a;
+			// a = true || true;   // true
+			// console.log(a);
+			// a = true || false;  // true
+			// console.log(a);
+			// a = false || true;  // true
+			// console.log(a);
+			// a = false || false; // false
+			// console.log(a);
+			
+			// && 非布尔值
+			// var result;
+			// result = 1 && 2;
+			// console.log(result);   // 2
+			// result = 2 && 1;
+			// console.log(result);   // 1
+			// result = 1 && 0;
+			// console.log(result);   // 0
+			// result = 0 && 1;
+			// console.log(result);   // 0
+			// result = "" && 1;
+			// console.log(result);   //
+			// result = 1 && "";
+			// console.log(result);   //
+			// result = null && 1;
+			// console.log(result);   // null
+			// result = 1 && null;
+			// console.log(result);   // null
+			// result = undefined && 1;
+			// console.log(result);   // undefined	
+			// result = 1 && undefined;
+			// console.log(result);   // undefined
+			// || 非布尔值
+			// var result;
+			// result = 1 || 2;
+			// console.log(result);   // 1
+			// result = 2 || 1;
+			// console.log(result);   // 2
+			// result = 1 || 0;
+			// console.log(result);   // 1
+			// result = 0 || 1;
+			// console.log(result);   // 1
+			// result = "" || 1;
+			// console.log(result);   // 1
+			// result = 1 || "";
+			// console.log(result);   // 1
+			// result = null || 1;
+			// console.log(result);   // 1
+			// result = 1 || null;
+			// console.log(result);   // 1
+			// result = undefined || 1;
+			// console.log(result);   // 1	
+			// result = 1 || undefined;
+			// console.log(result);   // 1	
+			
+			// 关系运算符：非数值的情况
+			// console.log(1>true);      // false
+			// console.log(1>=true);     // true
+			// console.log(1>"0");       // true
+			// console.log(10>null);     // true 
+			// // 任何值和NaN做任何比较都是`false`
+			// console.log(10<="hello"); // false
+			// // 比较两个字符串时，比较的是字符串的字符编码
+			// console.log("a" < "b");   // true
+			// // 比较字符编码时是一位一位进行比较
+			// // 如果两位一样，则比较下一位，所以借用它来对英文进行排序
+			// console.log("bcd" < "b"); // false
+			// console.log("11" < "5");  // true
+			// // 比较中文时没有意义
+			// console.log("我" < "你"); // false
+			// // 如果比较的两个字符串型的数字，可能会得到不可预期的结果
+			// // 注意：在比较两个字符串型的数字时，一定一定一定要转型
+			// console.log("12345675432" < +"5"); // false
+			
+			// 相等运算符
+			// console.log("1" == "abc"); // false
+			// console.log(true == 1); // true
+			// console.log(true == "1"); // true
+			// console.log(true == ""); // false
+			// console.log(true == "true"); // false
+			// console.log(true == null); // false
+			// console.log(true == undefined); // false
+			// console.log(true == NaN); // false
+			// console.log(false == 0); // true
+			// console.log(false == "0"); // true
+			// console.log(false == ""); // true
+			// console.log(false == "false"); // false
+			// console.log(false == null); // false
+			// console.log(false == undefined); // false
+			// console.log(false == NaN); // false
+			// console.log("" == 0); // true
+			// console.log("" == "0"); // false
+			// console.log("" == null); // false
+			// console.log("" == undefined); // false
+			// console.log("" == NaN); // false
+			// console.log(null == 0); // false
+			// console.log(null == "0"); // false
+			// console.log(null == ""); // false
+			// console.log(null == "null"); // false
+			// console.log(null == undefined); // true
+			// console.log(undefined == 0); // false
+			// console.log(undefined == "0"); // false
+			// console.log(undefined == ""); // false
+			// console.log(undefined == "undefined"); // false
+			// console.log(undefined == null); // true
+			// console.log(NaN == 0); // false
+			// console.log(NaN == "0"); // false
+			// console.log(NaN == ""); // false
+			// console.log(NaN == "NaN"); // false
+			// console.log(NaN == null); // false
+			// console.log(NaN == undefined); // false
+			// // undefined 衍生自null，所以这两个值做相等判断时，会返回true
+			// console.log(null == undefined); // true
+			// // NaN不和任何值相等，包括他本身
+			// console.log(NaN == NaN); // false
+			// // 可以通过isNaN()函数来判断一个值是否是NaN
+			// // 如果该值是NaN则返回true，否则返回false
+			// console.log(isNaN(NaN)); // true
+			
+			// 全等运算符
+			// console.log("123" === 123); // false
+			// console.log("123" !== 123); // true
+			
+	
+			// 三目运算符
+			var a = 30;
+			var b = 40;
+			var c = 90;
+			// 两数中取MAX
+			var max = a > b ? a : b;
+			console.log("max="+max);
+			// 三数中取MAX
+			max = a > b ? (a > c ? a : c) : (b > c ? b : c);
+			console.log("max="+max);
+			// 如果条件的表达式的求值结果是一个非布尔值，则会将其转换为布尔值，然后再运算
+			"hello" ? alert("111111") : alert("2222222");
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

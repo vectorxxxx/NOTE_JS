@@ -27,49 +27,151 @@
 			// console.log(a4);
 			// console.log(typeof a4);
 			
-			// **方式一：调用被转换数据类型的`toString()`方法**
-			// Number转换为String
+			// ### 7.1、其他数据类型转换为String
+			// #### 方式一：调用被转换数据类型的`toString()`方法
+			// // Number转换为String
 			// var a1 = 123;
 			// var b1 = a1.toString();
 			// console.log(typeof a1);
 			// console.log(typeof b1);
-			// Boolean转换为String
+			// // Boolean转换为String
 			// var a2 = true;
 			// var b2 = a2.toString();
 			// console.log(typeof a2);
 			// console.log(typeof b2);
-			// Null转换为String
+			// // Null转换为String
 			// var a3 = null;
 			// var b3 = a3.toString();
 			// console.log(typeof a3); 
 			// console.log(typeof b3);
-			// Undefined转换为String
+			// // Undefined转换为String
 			// var a4 = undefined;
 			// var b4 = a4.toString();
 			// console.log(typeof a4); 
 			// console.log(typeof b4);
-			
-			// **方式二：调用`String()`函数，并将被转换的数据作为参数传递给函数**
+			// #### 方式二：调用`String()`函数，并将被转换的数据作为参数传递给函数
 			// Number转换为String
-			var a1 = 123;
-			var b1 = String(a1);
-			console.log(typeof a1);
-			console.log(typeof b1);
-			// Boolean转换为String
-			var a2 = true;
-			var b2 = String(a2);
-			console.log(typeof a2);
-			console.log(typeof b2);
-			// Null转换为String
-			var a3 = null;
-			var b3 = String(a3);
-			console.log(typeof a3); 
-			console.log(typeof b3);
-			// Undefined转换为String
-			var a4 = undefined;
-			var b4 = String(a4);
-			console.log(typeof a4); 
-			console.log(typeof b4);
+			// var a1 = 123;
+			// var b1 = String(a1);
+			// console.log(typeof a1);
+			// console.log(typeof b1);
+			// // Boolean转换为String
+			// var a2 = true;
+			// var b2 = String(a2);
+			// console.log(typeof a2);
+			// console.log(typeof b2);
+			// // Null转换为String
+			// var a3 = null;
+			// var b3 = String(a3);
+			// console.log(typeof a3); 
+			// console.log(typeof b3);
+			// // Undefined转换为String
+			// var a4 = undefined;
+			// var b4 = String(a4);
+			// console.log(typeof a4); 
+			// console.log(typeof b4);
+			
+			// ### 7.2、其他数据类型转换为Number
+			// #### 方式一：使用Number()函数**
+			// 1、字符串 --> 数字
+			// 纯数字的字符串
+			// var a1 = '123';         
+			// a1 = Number(a1);
+			// console.log(typeof a1); // number
+			// console.log(a1); 	    // 123
+			// // 非数字的内容
+			// // var a2 = 'abc';         
+			// var a2 = undefined;    
+			// a2 = Number(a2);
+			// console.log(typeof a2); // number
+			// console.log(a2);        // NaN
+			// // 空串
+			// // var a3 = ' ';      
+			// var a3 = null;	
+			// a3 = Number(a3);        
+			// console.log(typeof a3); // number
+			// console.log(a3);        // 0
+			// // 2、布尔 --> 数字
+			// var a4 = true;
+			// a4 = Number(a4);
+			// console.log(typeof a4); // number
+			// console.log(a4);        // 1
+			// var a5 = false;
+			// a5 = Number(a5);
+			// console.log(typeof a5); // number
+			// console.log(a5);        // 0
+			// #### 方式二：专门用来对付字符串
+			// var a1 = "123";
+			// a1 = parseInt(a1);
+			// console.log(typeof a1); // number
+			// console.log(a1);        // 123
+			// var a2 = "123.456";
+			// a2 = parseInt(a2);
+			// console.log(typeof a2); // number
+			// console.log(a2);        // 123
+			// var a3 = "123px";
+			// a3 = parseInt(a3);
+			// console.log(typeof a3); // number
+			// console.log(a3);        // 123 
+			// // var a4 = null;
+			// // var a4 = undefined;
+			// // var a4 = '';
+			// // var a4 = 'abc';
+			// // var a4 = true;
+			// var a4 = false;
+			// a4 = parseInt(a4);
+			// console.log(typeof a4); // number
+			// console.log(a4);        // NaN
+			
+			// ### 7.3、其他数据类型转换为Boolean
+			// #### 使用`Boolean()`函数
+			// - 数字-—->布尔
+			//   - 除了`0`和`NaN`，其余的都是`true`
+			// var a1 = 0;
+			var a1 = NaN;
+			a1 = Boolean(a1);
+			console.log(a1); // false
+			var a2 = 123;
+			a2 = Boolean(a2);
+			console.log(a2); // true
+			// - 字符串-—->布尔
+			//   - 除了空串，其余的都是`true`
+			var a3 = "123";
+			a3 = Boolean(a3);
+			console.log(a3); // true
+			var a4 = " ";
+			a4 = Boolean(a4);
+			console.log(a4); // true
+			var a5 = "";
+			a5 = Boolean(a5);
+			console.log(a5); // false
+			// - `null`和`undefined`都会转换为`false`
+			// var a6 = null;
+			var a6 = undefined;
+			a6 = Boolean(a6);
+			console.log(a6); // false
+			// - 对象也会转换为`true`
+			
+			// 十六进制数字
+			// var a = 0x10;
+			// console.log(a); // 16
+			// a=0xff;
+			// console.log(a); // 255
+			// a=0xCafe;
+			// console.log(a); // 51966
+			// a = "0x70";
+			// a = parseInt(a,16);
+			// console.log(a); // 112
+			// // 八进制数字
+			// a=070;
+			// console.log(a); // 56
+			// a = "070";
+			// a = parseInt(a,8);
+			// console.log(a);
+			// // 二进制数字
+			// a=0b10;
+			// console.log(a); // 2
+			
 		</script>
 		<script src="/js/script.js" type="text/javascript" charset="utf-8"></script>
 	</head>
