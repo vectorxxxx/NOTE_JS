@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+		// ### if语句
+		// 练习1
+		// 从键盘输入小明的期末成绩：
+		// 当成绩为100时，’奖励一辆BMW’
+		// 当成绩为[80-99]时，’奖励一台iphone15s'
+		// 当成绩为[60-80]时，’奖励一本参考书’	
+		// 其他时，什么奖励也没有
+		// var score = prompt("请输入小明的期末成绩：");
+		// if(score == 100){
+		// 	alert("奖励一辆BMW");
+		// } else if(score >80 && score <= 99){
+		// 	alert("奖励一台iphone15s");
+		// } else if(score >60 && score <= 80){
+		// 	alert("奖励一本参考书");
+		// } else{
+		// 	alert("什么奖励也没有");
+		// }
+		
+		// 练习2
+		// 大家都知道，男大当婚，女大当嫁。那么女方家长要嫁女儿，当然要提出一定的条件：
+		// 高：180cm以上；富：1000万以上；帅：500以上；如果这三个条件同时满足，则：’我一定要嫁给他’
+		// 如果三个条件有为真的情况，则：’嫁吧，比上不足，比下有余。’
+		// 如果三个条件都不满足，则：’不嫁！’
+
+		// 练习3
+		// 编写程序，由键盘输入三个整数分别存入变量num1、num2、num3，对他们进行排序，并且从小到大输出。
+
+
+
+		// ### switch语句
+		// 对于成绩大于60分的，输出’合格’。低于60分的，输出’不合格’
+		// var score = prompt("请输入成绩：");
+		// var tmp = parseInt(score/10);
+		// switch (tmp){
+		// 	case 10:
+		// 	case 9:
+		// 	case 8:
+		// 	case 7:
+		// 	case 6:
+		// 		alert("合格");
+		// 		break;
+		// 	default:
+		// 		alert("不合格");
+		// 		break;
+		// }
+		
+		
+		
+		// while语句
+		// 假如投资的年利率为5%，试求从1000块增长到5000块，需要花费多少年
+		// var money = 1000;
+		// var year = 0;
+		// while(money < 5000){
+		// 	money *= 1 + 0.05;
+		// 	year++;
+		// }
+		// alert("需要花费" + year + "年");
+		
+		
+		
+		// for语句
+		// 练习1、打印1-100之间所有奇数之和
+		// for(i=1,result=0;i<=100;i++){
+		// 	if(i%2 == 1){	
+		// 		result += i;
+		// 	}
+		// }
+		// console.log('result='+result);
+		// 练习2、打印1-100之间所有7的倍数的个数及总和
+		// for(i=1,result=0,count=0;i<=100;i++){
+		// 	if(i%7 == 0){	
+		// 		result += i;
+		// 		count++;
+		// 	}
+		// }
+		// console.log('个数='+count+'，总和='+result);
+		
+		// 练习3、水仙花数
+		// 水仙花数是指一个3位数，它的每个位上的数字的3次幂之和等于它本身。
+		// （例如：1^3+5^3+3^3=153），请打印所有的水仙花数。
+		// var hundreds_place;
+		// var tens_place;
+		// var ones_place;
+		// for(i=100;i<1000;i++){
+		// 	hundreds_place = parseInt(i/100);
+		// 	tens_place = parseInt(i/10) - parseInt(hundreds_place*10);
+		// 	ones_place = i % 10;
+		// 	if(i == (hundreds_place*hundreds_place*hundreds_place 
+		// 			+ tens_place*tens_place*tens_place 
+		// 			+ ones_place*ones_place*ones_place)){
+		// 		console.log(i);
+		// 	}
+		// }
+
+		// 练习4、在页面中接收一个用户输入的数字，并判断该数是否是质数。
+		// 质数：只能被1和它自身整除的数，1不是质数也不是合数，质数必须是大于1的自然数。
+		// var num = prompt("请输入一个数字：");
+		// while(isNaN(num)){
+		// 	num = prompt("请输入一个数字：");
+		// }
+		// flag = true;
+		// for(j=2;j<num;j++){
+		// 	if(num%j==0){
+		// 		flag = false;
+		// 		break;
+		// 	}
+		// }
+		// if(flag){
+		// 	alert(num + "是质数");
+		// } else{
+		// 	alert(num + "不是质数");
+		// }
+
+		
+		// 练习5、通过程序，在页面中输出如下的图形：
+		// *
+		// **
+		// ***
+		// ****
+		// *****
+		// 通过一个for循环来输出图形
+		// 这个for循环执行几次，图形的高度就是多少
+		// 它可以用来控制图形的高度
+		// for(i=0;i<5;i++){
+		// 	// 在循环的内部再创建一个循环，用来控制图形的宽度
+		// 	// 目前我们的外部的for循环执行1次，内部的就会执行5次
+		// 	// 内层循环可以来决定图形的宽度，执行几次图形的宽度就是多少
+		// 	for(j=0;j<=i;j++){
+		// 		document.write("*");
+		// 	}
+		// 	document.write("<br/>");
+		// }
+		// *****
+		// ****
+		// ***
+		// **
+		// *
+		// for(i=0;i<5;i++){
+		// 	for(j=0;j<5-i;j++){
+		// 		document.write("*");
+		// 	}
+		// 	document.write("<br/>");
+		// }
+		
+		// 练习6、九九乘法表
+		// for(i=1;i<10;i++){
+		// 	for(j=1;j<=i;j++){
+		// 		document.write(j + "×" + i + "=" + i*j + "\t");
+		// 	}
+		// 	document.write("<br/>");
+		// 	document.write("<br/>");
+		// }
+		
+		// 练习7、打印100以内的所有质数
+		// var flag = true;
+		// for(i=2;i<=100;i++){
+		// 	flag = true;
+		// 	for(j=2;j<i;j++){
+		// 		if(i%j==0){
+		// 			flag = false;
+		// 			break;
+		// 		}
+		// 	}
+		// 	if(flag){
+		// 		console.log(i);
+		// 	}
+		// }
+		
+	    // 质数性能优化
+		console.time("test");
+		var flag;
+		for(i=2;i<=100000;i++){
+			flag = true;
+			for(j=2;j<=i/Math.sqrt(i);j++){
+				if(i%j==0){
+					flag = false;
+					break;
+				}
+			}
+			if(flag){
+				// console.log(i);
+			}
+		}
+		console.timeEnd("test");
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
