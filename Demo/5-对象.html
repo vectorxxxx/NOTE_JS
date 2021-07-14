@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>对象</title>
+		<script type="text/javascript">
+		 //    // 创建对象
+			// var obj = new Object();
+			// // 向obj中添加一个name属性
+			// obj.name = "孙悟空";
+			// // 向obj中添加一个gender属性
+			// obj.gender = "男";
+			// // 向obj中添加一个age属性
+			// obj.age = 18;
+			// // 打印obj
+			// console.log(typeof obj); // object
+			// console.log(obj); // {"age":18,"gender":"男","name":"孙悟空"}
+			// console.log(obj.name); // 孙悟空
+			// // 修改obj的age属性
+			// obj.age = 1000;
+			// console.log(obj.age); // 1000
+			
+			
+			// // []
+			// obj["name"] = "齐天大圣";
+			// console.log(obj["name"]); // 齐天大圣
+			// // [变量]
+			// var n = "nihao";
+			// obj[n] = "你好";
+			// console.log(obj[n]); // 你好
+			
+			// // 属性值为对象
+			// var obj2 = new Object();
+			// obj2.name = "猪八戒";
+			// obj.bro = obj2;
+			// console.log(obj.bro.name); // 猪八戒
+			
+			// // in运算符
+			// console.log("test" in obj); // false
+			// console.log("name" in obj); // true
+			
+			// // 基本数据类型
+			// var a = 1;
+			// var b = a;
+			// console.log("a=" + a + ", b=" + b); // a=1, b=1
+			// b = 2;
+			// console.log("a=" + a + ", b=" + b); // a=1, b=2
+			// // 引用数据类型
+			// var obj3 = obj;
+			// obj3.name = "斗战胜佛";
+			// console.log(obj.name);  // 斗战胜佛
+			// console.log(obj3.name); // 斗战胜佛
+			// // 比较
+			// var o1 = new Object();
+			// var o2 = new Object();
+			// o1["name"] = "周瑜";
+			// o2["name"] = "周瑜";
+			// console.log(o1 == o2); // false
+			
+			var obj = {
+				name: "孙悟空",
+				age: 1000,
+				gender: "男",
+				bor:{
+					name: "猪八戒"
+				}
+			}
+			console.log(obj); // {"age":1000,"bor":{"name":"猪八戒"},"gender":"男","name":"孙悟空"}
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
