@@ -237,9 +237,59 @@ console.log(obj); // {"age":1000,"bor":{"name":"猪八戒"},"gender":"男","name
 
 
 
-## 5、函数
+## 5、方法
 
-函数也是一个对象，可以封装一些功能（代码），在需要时可以执行这些功能（代码），可以保存一些代码在需要的时候调用
+对象的属性值可以是任何的数据类型，也可以是个函数（下一节知识）
 
-使用`typeof`检查一个函数对象时，会返回`function`
+函数也可以称为对象的属性，如果一个函数作为一个对象的属性保存，那么我们称这个函数是这个对象的方法
+
+调用函数就说调用对象的方法，但是它只是名称上的区别没有其他的区别
+
+```javascript
+var obj2 = {
+    name: "猪八戒",
+    age: 18,
+    sayName: function() {
+        console.log(obj2.name);
+    }
+};
+obj2.sayName(); // 猪八戒
+```
+
+
+
+## 6、枚举对象中的属性
+
+使用`for...in`语句语法：
+
+```javascript
+for(var 变量 in 对象) {
+	语句...
+}
+```
+
+`for...in`语句对象中有几个属性，循环体就会执行几次
+
+每次执行时，会将对象中的一个属性的名字赋值给变量
+
+```javascript
+var obj = {
+    name: "孙悟空",
+    age: 1000,
+    gender: "男",
+    address: "花果山"
+};
+for(var key in obj){
+    console.log(key + "=" + obj.key);
+    // name=undefined
+    // age=undefined
+    // gender=undefined
+    // address=undefined
+    console.log(key + "=" + obj[key]);
+    // name=孙悟空
+    // age=1000
+    // gender=男
+    // address=花果山
+}
+```
 

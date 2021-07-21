@@ -57,16 +57,45 @@
 			// o2["name"] = "周瑜";
 			// console.log(o1 == o2); // false
 			
+			// var obj = {
+			// 	name: "孙悟空",
+			// 	age: 1000,
+			// 	gender: "男",
+			// 	bor:{
+			// 		name: "猪八戒"
+			// 	}
+			// }
+			// console.log(obj); // {"age":1000,"bor":{"name":"猪八戒"},"gender":"男","name":"孙悟空"}
+			
+
+			// var obj2 = {
+			// 	name: "猪八戒",
+			// 	age: 18,
+			// 	sayName: function() {
+			// 		console.log(obj2.name);
+			// 	}
+			// };
+			// obj2.sayName(); // 猪八戒
+			
+			
 			var obj = {
 				name: "孙悟空",
 				age: 1000,
 				gender: "男",
-				bor:{
-					name: "猪八戒"
-				}
+				address: "花果山"
+			};
+			for(var key in obj){
+				console.log(key + "=" + obj.key);
+				// name=undefined
+				// age=undefined
+				// gender=undefined
+				// address=undefined
+				console.log(key + "=" + obj[key]);
+				// name=孙悟空
+				// age=1000
+			    // gender=男
+				// address=花果山
 			}
-			console.log(obj); // {"age":1000,"bor":{"name":"猪八戒"},"gender":"男","name":"孙悟空"}
-			
 		</script>
 	</head>
 	<body>
