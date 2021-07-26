@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作用域</title>
+		<script type="text/javascript">
+			// var a = 3;
+			// console.log(window.a); //3
+			// console.log(a); //3
+			
+			// b = 3; // 相当于window.b
+			// console.log(b); //3
+			
+			
+			// 1.1、变量的声明提前
+			// // 1、变量的声明提前
+			// console.log("a = " + a); // a = undefined
+			// var a = "abc";
+			// // ======相当于======
+			// var a;
+			// console.log("a = " + a); // a = undefined
+			// a = "abc";
+			// // 2、没有变量的声明提前，报错
+			// console.log("b = " + b); // UncaughtReferenceError: b is not defined
+			// b = "abc";
+			// // ======相当于======
+			// console.log("b = " + b); // UncaughtReferenceError: b is not defined
+			// window.b = "abc";
+			
+			// // 1.2、函数的声明提前
+			// fun1(); // fun1...
+			// fun2(); // UncaughtTypeError: fun2 is not a function
+			// // 函数声明，会被提前创建
+			// function fun1(){
+			// 	console.log("fun1...");
+			// }
+			// // 函数表达式，不会被提前创建（变量会被提前声明，但函数不会被提前创建）
+			// var fun2 = function(){
+			// 	console.log("fun1...");
+			// }
+			
+			
+			// 2、函数作用域
+			// var a = 10;
+			// function fun1(){
+			// 	var a = 20;
+			// 	console.log(a);
+			// }
+			// fun1(); // 20
+
+			// var a = 10;
+			// function fun2(){
+			// 	var a = 20;
+				
+			// 	function fun3(){
+			// 		var a = 30;
+			// 		console.log("fun3 ==> a = " + a);  // fun3 ==> a = 30
+			// 	}
+				
+			// 	fun3();
+				
+			// 	console.log("fun2 ==>a = " + a); // fun2 ==>a = 20
+			// 	console.log("a = " + window.a); // a = 10
+			// }
+			// fun2(); 
+			// console.log("a = " + a); // a = 10
+			
+			// // 在函数作用域也有声明提前的特性，使用`var`关键字声明的变量，会在函数中所有的代码执行之前被声明
+			// function func1(){
+			// 	console.log(a);
+			// 	var a = "func1";
+				
+			// 	// 函数声明也会在函数中所有的代码执行之前执行
+			// 	func2(); // fun2...
+			// 	function func2(){
+			// 		console.log("fun2...");
+			// 	}
+			// }
+			// func1(); // undefined
+			
+			// // 在函数中，不适用`var`声明的变量都会成为全局变量
+			// // 函数声明且调用
+			// func3();
+			// function func3() {
+			// 	a = 4;
+			// }
+			// console.log("a = " + window.a);  // a = 4
+			// console.log("a = " + window["a"]);   // a = 4
+			// console.log("a = " + a);    // a = 4
+			// // 函数声明不调用
+			// function func4() {
+			// 	b = 4;
+			// }
+			// console.log("b = " + window.b);  // b = 4
+			// console.log("b = " + window["b"]);   // b = 4
+			// console.log("b = " + b);    // UncaughtReferenceError: b is not defined
+			
+			// // 定义形参就相当于在函数作用域中声明了变量
+			// var e = 10;
+			// function fun5(e){
+			// 	console.log(e);
+			// }
+			// fun5(); // undefined
+			// fun5(55);  // 55
+			
+			// 练习
+			// 说出以下代码的执行结果
+			var a = 123; 
+			function fun(){
+			    console.log(a);
+			}
+			fun(); 			// 123
+			// =====================
+			var a = 123; 
+			function fun(){
+			    console.log(a);
+			    var a = 456;
+			}
+			fun(); 			// undefined
+			console.log(a); // 123
+			// =====================
+			var a = 123; 
+			function fun(){
+			    console.log(a);
+			    a = 456;
+			}
+			fun(); 			// 123
+			console.log(a); // 456
+			// =====================
+			var a = 123; 
+			function fun(a){
+			    console.log(a);
+			    a = 456;
+			}
+			fun();			// undefined
+			console.log(a); // 123
+			// =====================
+			var a = 123; 
+			function fun(a){
+			    console.log(a);
+			    a = 456;
+			}
+			fun(789);		// 789
+			console.log(a); // 123
+			</script>
+	</head>
+	<body>
+	</body>
+</html>

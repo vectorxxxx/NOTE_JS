@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>使用工厂方法创建对象</title>
+		<script type="text/javascript">
+			function createPerson(name, age, gender){
+				// 创建一个新的对象
+				var obj=new Object();
+				//向对象中添加属性
+				obj.name = name;
+				obj.age = age;
+				obj.gender = gender;
+				obj.sayName = function(){
+					console.log(this.name);
+				};
+				//将新的对象返回
+				return obj;
+			}
+			
+			var obj1 = createPerson("孙悟空", 1000, "男");
+			var obj2 = createPerson("猪八戒", 3600, "男");
+			var obj3 = createPerson("沙悟净", 10000, "男");
+			
+			obj1.sayName(); // 孙悟空
+			obj2.sayName(); // 猪八戒
+			obj3.sayName(); // 猪八戒
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

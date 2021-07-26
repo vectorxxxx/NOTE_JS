@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>构造函数</title>
+		<script type="text/javascript">
+			// function Person(){
+			// 	console.log(this); // Person{}
+			// }
+			// // 普通函数
+			// var fun = Person();
+			// console.log(fun); // undefined
+			// // 构造函数
+			// var person = new Person();
+			// console.log(person); // Person{}
+			
+			function Dog(){
+				
+			}
+			
+			function Person(name, age, gender){
+			    //向对象中添加属性
+			    this.name = name;
+			    this.age = age;
+			    this.gender = gender;
+			    this.sayHello = function(){
+			        console.log("My'name is " + this.name + ", " +
+								"I'm " + this.age + " years old, " +
+								"and I'm a " + this.gender + ".");
+			    };
+			}
+			
+			var person1 = new Person("孙悟空", 1000, "man");
+			var person2 = new Person("猪八戒", 3600, "man");
+			var person3 = new Person("沙悟净", 10000, "man");
+			var dog = new Dog();
+			person1.sayHello(); // My'name is 孙悟空, I'm 1000 years old, and I'm a man.
+			person2.sayHello(); // My'name is 猪八戒, I'm 3600 years old, and I'm a man.
+			person3.sayHello(); // My'name is 沙悟净, I'm 10000 years old, and I'm a man.
+			console.log(person1); // Person {name: "孙悟空", age: 1000, gender: "man", sayHello: ƒ}
+			console.log(person2); // Person {name: "猪八戒", age: 3600, gender: "man", sayHello: ƒ}
+			console.log(person3); // Person {name: "沙悟净", age: 10000, gender: "man", sayHello: ƒ}
+			console.log(typeof person1); // object
+			console.log(typeof person2); // object
+			console.log(typeof person3); // object
+			console.log(person1 instanceof Person); //true
+			console.log(person2 instanceof Person); //true
+			console.log(person3 instanceof Person); //true
+			console.log(dog instanceof Person); 	//false
+			console.log(person1 instanceof Object); //true
+			console.log(person2 instanceof Object); //true
+			console.log(person3 instanceof Object); //true
+			console.log(dog instanceof Object); 	//true
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
