@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>原型对象</title>
+		<script type="text/javascript">
+			function MyClass(){
+
+			}
+			MyClass.prototype.name = "I'm prototype's name.";
+			var mc = new MyClass();
+			mc.age = 18;
+			// // 使用in检查对象中是否含有某个属性时，如果对象中没有但是原型中有，也会返回true
+			// console.log("name" in mc); // true
+			// console.log("age" in mc); // true
+			// // 可以使用对象的hasOwnProperty()来检查对象自身中是否含有该属性
+			// // 使用该方法只有当对象自身中含有属性时，才会返回true
+			// console.log(mc.hasOwnProperty("name")); // false
+			// console.log(mc.hasOwnProperty("age"));  // true
+			
+			
+			console.log(mc.hasOwnProperty("hasOwnProperty"));  // false
+			console.log(mc.__proto__.hasOwnProperty("hasOwnProperty"));  // false
+			console.log(mc.__proto__.__proto__.hasOwnProperty("hasOwnProperty"));  // true
+			console.log(mc.__proto__.__proto__.__proto__);  // null
+			console.log(mc.helloWorld);  // undefined
+			
+			console.log(mc.__proto__.__proto__); 
+			</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>原型对象</title>
+		<script type="text/javascript">
+			
+			// function Person(){
+
+			// }
+			
+			function MyClass(){
+
+			}
+			
+			// console.log(Person.prototype);
+			// // {constructor: ƒ}
+			// // 		constructor: ƒ Person()
+			// // 			arguments: null
+			// // 			caller: null
+			// // 			length: 0
+			// // 			name: "Person"
+			// // 			prototype: {constructor: ƒ}
+			// // 			__proto__: ƒ ()
+			// // 			[[FunctionLocation]]: 09-原型对象.html:8
+			// // 			[[Scopes]]: Scopes[1]
+			// // 		__proto__: Object
+			// console.log(Person.prototype == MyClass.prototype); // false
+			
+			var mc1 = new MyClass();
+			var mc2 = new MyClass();
+			var mc3 = new MyClass();
+			console.log(mc1.__proto__ == MyClass.prototype); // true
+			console.log(mc2.__proto__ == MyClass.prototype); // true
+			console.log(mc3.__proto__ == MyClass.prototype); // true
+			
+			// 向MyClass中添加属性a
+			MyClass.prototype.a = "123";
+			console.log(mc1.a);  // 123
+			mc2.a = "456";
+			console.log(mc2.a);  // 456
+			// 向MyClass中添加方法sayHello
+			MyClass.prototype.sayHello = function(){
+				alert("hello");
+			}
+			mc3.sayHello();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

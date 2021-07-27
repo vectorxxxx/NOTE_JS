@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>构造函数修改</title>
+		<script type="text/javascript">
+			
+			function Person(name, age, gender){
+			    this.name = name;
+			    this.age = age;
+			    this.gender = gender;
+			    this.sayHello = fun;
+			}
+			
+			function fun(){
+			    console.log("My'name is " + this.name + ", " +
+							"I'm " + this.age + " years old, " +
+							"and I'm a " + this.gender + ".");
+			};
+			
+			var person1 = new Person("孙悟空", 1000, "man");
+			var person2 = new Person("猪八戒", 3600, "man");
+			var person3 = new Person("沙悟净", 10000, "man");
+			person1.sayHello(); 
+			person2.sayHello();
+			person3.sayHello();
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
