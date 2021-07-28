@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组</title>
+		<script type="text/javascript">
+			// 创建数组对象
+			var arr = new Array();
+			// 使用typeof检查一个数组时，会返回object
+			console.log(typeof arr); // object
+			/*
+			 *向数组中添加元素
+			 *语法：数组[索引] = 值
+			 */
+			arr[0] = 10;
+			arr[1] = 33;
+			arr[2] = 22;
+			/*
+			 * 读取数组中的元素
+			 * 语法：数组[索引]
+			 * 如果读取不存在的索引，他不会报错而是返回undefined
+			 */
+			console.log(arr[2]); // 22
+			console.log(arr[3]); // undefined
+			/* 
+			 * 获取数组的长度
+			 * 可以使用1ength属性来获取数组的长度（元素的个数）语法：数组.length
+			 * 对于连续的数组，使用1ength可以获取到数组的长度（元素的个数）
+			 * 对于非连续的数组，使用length会获取到数组的最大的索引+1
+			 * 尽量不要创建非连续的数组
+			 */
+			console.log(arr.length); // 3
+			console.log(arr); // {"0":10,"1":33,"2":22,"length":3}
+			arr[10] = 33;
+			console.log(arr.length); // 11
+			console.log(arr); // {"0":10,"1":33,"10":33,"2":22,"length":11}
+			/*
+			 * 修改length
+			 * 如果修改的length大于原长度，则多出部分会空出来
+			 * 如果修改的length小于原长度，则多出的元素会被删除
+			 */
+			arr.length = 100;
+			console.log(arr.length); // 100
+			console.log(arr); // {"0":10,"1":33,"10":33,"2":22,"length":100}
+			arr.length = 2;
+			console.log(arr.length); // 2
+			console.log(arr); // {"0":10,"1":33,"length":2}
+			// 向数组的最后一个位置添加元素
+			// 语法：数组[数组.length] = 值;
+			arr[arr.length] = 22;
+			console.log(arr.length); // 3
+			console.log(arr); // {"0":10,"1":33,"2":22,"length":3}
+			arr[arr.length] = 33;
+			console.log(arr.length); // 4
+			console.log(arr); // {"0":10,"1":33,"2":22,"3":33,"length":4}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

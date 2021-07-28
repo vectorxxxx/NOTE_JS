@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组字面量</title>
+		<script type="text/javascript">
+			var arr1 = [];
+			console.log(arr1); // {"length":0}
+			console.log(typeof arr1); // object
+			console.log(arr1.length); // 0
+			
+			// **使用字面量创建数组时，可以在创建时就指定数组中的元素**
+			var arr2 = [1,2,3,4,5,10];
+			console.log(arr2);  // {"0":1,"1":2,"2":3,"3":4,"4":5,"5":10,"length":6} 
+			console.log(arr2.length); // 6
+			
+			// **使用构造函数创建数组时，也可以同时添加元素，将要添加的元素作文构造函数的参数传递**
+			// 元素之间使用,隔开
+			var arr3 = new Array(1,2,3,4,5);
+			console.log(arr3);  // {"0":1,"1":2,"2":3,"3":4,"4":5,"length":5} 
+			console.log(arr3.length); // 5
+			
+			// **字面量和构造函数只有一个数字时的区别**
+			// 创建一个数组数组中只有一个元素10
+			var arr4 = [10];
+			// 创建一个长度为10的数
+			var arr5 = new Array(10);
+			console.log(arr4.length);  // 1
+			console.log(arr5.length);  // 10
+			
+			// **数组中的元素可以是任意的数组类型**
+			var arr6 = [2, "13", true, null, undefined];
+			console.log(arr6); 
+			// Array(5)
+			// 	0: 2
+			// 	1: "13"
+			// 	2: true
+			// 	3: null
+			// 	4: undefined
+			// 	length: 5
+			
+			// **也可以是一个对象**
+			var obj = {name:"孙悟空"};
+			var arr7 = [];
+			arr7[arr7.length] = obj;
+			console.log(arr7); // {"0":{"name":"孙悟空"},"length":1} 
+			arr7 = [{name:"孙悟空"}, {name:"沙和尚"}, {name:"猪八戒"}];
+			console.log(arr7); // {"0":{"name":"孙悟空"},"1":{"name":"沙和尚"},"2":{"name":"猪八戒"},"length":3}
+			// **也可以是一个函数**
+			arr7 = [function(){alert(1)},function(){alert(2)}]; 
+			console.log(arr7); // {"0":"function (){alert(1)}","1":"function (){alert(2)}","length":2}
+			
+			// *也可以是一个数组*
+			// 数组中也可以放数组，如下这种数组我们称为二维数组
+			arr7 = [[1,2,3],[4,5,6],[7,8,9]];
+			console.log(arr7); // {"0":{"0":1,"1":2,"2":3,"length":3},"1":{"0":4,"1":5,"2":6,"length":3},"2":{"0":7,"1":8,"2":9,"length":3},"length":3}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

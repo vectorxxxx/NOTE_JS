@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组遍历</title>
+		<script type="text/javascript">
+			// var arr = ["孙悟空", "猪八戒", "沙悟净", "白龙马"];
+			// 所谓的遍历数组，就是将数组中所有的元素都取出来
+			// for(var i=0;i<arr.length;i++){
+			// 	console.log(arr[i]);
+			// }
+			
+			// **练习**
+			function Person(name, age){
+			    this.name = name;
+			    this.age = age;
+			}
+			
+			// 创建Person对象
+			var per1 = new Person("孙悟空", 18);
+			var per2 = new Person("猪八戒", 28);
+			var per3 = new Person("红孩儿", 8);
+			var per4 = new Person("蜘蛛精", 16);
+			var per5 = new Person("二郎神", 38);
+			
+			// 将这些person对象放入到一个数组中
+			var perArr = [per1, per2, per3, per4, per5];
+			console.log(perArr);
+			// 0: Person {name: "孙悟空", age: 18}
+			// 1: Person {name: "猪八戒", age: 28}
+			// 2: Person {name: "红孩儿", age: 8}
+			// 3: Person {name: "蜘蛛精", age: 16}
+			// 4: Person {name: "二郎神", age: 38}
+			
+			// 创建一个函数，可以将perArr中的满18岁的Person提取出来
+			// 然后封装到一个新的数组中并返回
+			function getAdult(perArr){
+				// 创建一个新的数组
+				var resultArr = [];
+				var person;
+				// 遍历arr，获取arr中Person对象
+				for(var i=0;i<perArr.length;i++){
+					person = perArr[i];
+					// 判断Person对象的age是否大于等于18
+					if(person.age >= 18){
+						// 如果大于等于18，则将这个对象添加到newArr中
+						resultArr.push(person);
+					}
+				}
+				// 将数组返回
+				return resultArr;
+			}
+			var adult = getAdult(perArr);
+			console.log(adult);
+			// 0: Person {name: "孙悟空", age: 18}
+			// 1: Person {name: "猪八戒", age: 28}
+			// 2: Person {name: "二郎神", age: 38}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
