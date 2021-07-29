@@ -323,6 +323,130 @@ console.log(result); // ["唐三藏", "菩提老祖"]
 - `slice`可以提取数组中指定元素
 - `splice`可以删除元素、替换元素、插入元素（功能更强大）
 
+### concat()
+
+`concat()`可以连接两个或多个数组，并将新的数组返回
+
+该方法不会对原数组产生影响
+
+```javascript
+var arr1 = ["孙悟空", "猪八戒", "沙悟净"];
+var arr2 = ["青毛狮子怪", "黄牙老象", "大鹏金翅雕"];
+var arr3 = ["虎力大仙", "鹿力大仙", "羊力大仙"];
+var arr4 = arr1.concat(arr2,arr3,"牛魔王","铁扇公主","红孩儿");
+console.log(arr1); // ["孙悟空", "猪八戒", "沙悟净"]
+console.log(arr2); // ["青毛狮子怪", "黄牙老象", "大鹏金翅雕"]
+console.log(arr3); // ["虎力大仙", "鹿力大仙", "羊力大仙"]
+console.log(arr4); // ["孙悟空", "猪八戒", "沙悟净", "青毛狮子怪", "黄牙老象", "大鹏金翅雕", "虎力大仙", "鹿力大仙", "羊力大仙", "牛魔王", "铁扇公主", "红孩儿"]
+```
+
+### join()
+
+该方法可以将数组转换为一个字符串
+
+该方法不会对原数组产生影响，而是将转换后的字符串作为结果返回
+
+在`join()`中可以指定一个字符串作为参数，这个字符串将会成为数组中元素的连接符
+
+如果不指定连接符，则默认使用`,`作为连接符
+
+```javascript
+var arr = ["孙悟空", "猪八戒", "沙悟净"];
+var result = arr.join();
+console.log(arr); // ["孙悟空", "猪八戒", "沙悟净"]
+console.log(result); // 孙悟空,猪八戒,沙悟净
+console.log(typeof result); // string
+
+result = arr.join("");
+console.log(result); // 孙悟空猪八戒沙悟净
+
+result = arr.join("@");
+console.log(result); // 孙悟空@猪八戒@沙悟净
+```
+
+### reverse()
+
+该方法用来反转数组（前边的去后边，后边的去前边）
+
+该方法会直接修改原数组
+
+```javascript
+var arr = ["孙悟空", "猪八戒", "沙悟净"];
+arr.reverse();
+console.log(arr); // ["沙悟净", "猪八戒", "孙悟空"]
+```
+
+### sort()
+
+可以用来对数组中的元素进行排序
+
+也会影响原数组，默认会按照Unicode编码进行排序
+
+```javascript
+var arr = ['f', 'b', 'a', 'h', 'e', 'd'];
+arr.sort();
+console.log(arr); // ["a", "b", "d", "e", "f", "h"]
+```
+
+即使对于纯数字的数组，使用`sort()`排序时，也会按照Unicode编码来排序
+
+所以对数字进行排序时，可能会得到错误的结果
+
+```javascript
+arr = ['2', '44', '9', '8', '2', '0'];
+arr.sort();
+console.log(arr); // ["0", "2", "2", "44", "8", "9"]
+```
+
+我们可以目己采指正排序的现则我们可以在`sort()`添加一个回调函数，来指定排序规则
+
+回调函数中需要定义两个形参，浏览器将会分别使用数组中的元素作为实参去调用回调函数
+
+使用哪个元素调用不确定，但是肯定的是在数组中a一定在b前边
+
+浏览器会根据回调函数的返回值来决定元素的顺序，
+
+- 如果返回一个大于0的值，则元素会交换位置
+- 如果返回一个小于等于0的值，则元素位置不变
+
+```javascript
+arr = [2, 44, 9, 8, 2, 0, 6];
+arr.sort(function(a,b){
+    if(a > b){
+        return 1;
+    } else {
+        return -1;
+    }
+});
+console.log(arr); // [0, 2, 2, 6, 8, 9, 44]
+```
+
+- 如果需要升序排列，则返回`a - b`
+- 如果需要降序排列，则返回`b - a`
+
+```javascript
+arr.sort(function(a,b){
+    // 升序排列
+    return a - b;
+});
+console.log(arr); // [0, 2, 2, 6, 8, 9, 44]
+arr.sort(function(a,b){
+    // 降序排列
+    return b - a;
+});
+console.log(arr); // [44, 9, 8, 6, 2, 2, 0]
+```
+
+**小结**
+
+- 会对原数组产生影响的方法：`push`、`pop`、`shift`、`unshift`、`splice`、`reverse`、`sort`
+- 不会对原数组产生影响的方法：`slice`、`concat`、`join`
+- 添加元素的方法：`push`、`unshift`、`splice`
+- 删除元素的方法：`pop`、`shift`、`splice`
+- 替换元素的方法：`splice`
+- 连接元素的方法：`concat`、`join`
+- 排序方法：`reverse`、`sort`
+
 
 
 ## 5、数组遍历
@@ -427,5 +551,33 @@ arr.forEach(function(value, index, obj){
     console.log("index = " + index);
     console.log("obj = " + obj);
 });
+```
+
+
+
+## 练习
+
+### 数组去重
+
+```javascript
+// 创建一个数组
+var arr = [1,2,2,3,2,1,3,4,2,5];
+// 去除数组中重复的数字
+// 获取数组中的每一个元素
+for(var i=0;i<arr.length;i++){
+    // 获取当前元素后的所有元素
+    for(var j=i+1;j<arr.length;j++){
+        // 判断两个元素的值是否相等
+        if(arr[i] == arr[j]){
+            // 如果相等则证明出现了重复的元素，则删除j对应的元素
+            // arr.splice(j, 1);
+            // 当删除了当前j所在的元素以后，后边的元素会自动补位
+            // 此时将不会再比较这个元素，需要再比较一次j所在位置的元素
+            // j--;
+            arr.splice(j--, 1);
+        }
+    }
+}
+console.log(arr);
 ```
 
