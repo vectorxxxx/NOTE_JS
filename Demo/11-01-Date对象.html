@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Date对象</title>
+		<script type="text/javascript">
+			// ## 1、Date对象
+			// 在JS中使用`Date`对象来表示一个时间
+			// ### 创建一个Date对象
+			// 如果直接使用构造函数创建一个`Date`对象，则会封装为当前代码执行的时间
+			var d = new Date();
+			console.log(d); // Fri Jul 30 2021 21:51:37 GMT+0800 (中国标准时间)
+			// 创建一个指定的时间对象
+			// 需要在构造函数中传递一个表示时间的字符串作为参数
+			// 日期的格式：月/日/年 时:分:秒
+			d = new Date("08/01/2021 12:34:56");
+			console.log(d); // Sun Aug 01 2021 12:34:56 GMT+0800 (中国标准时间)
+			d = new Date("08/01/21 12:34:56"); // 为了避免在不同浏览器中产生歧义，尽量指定完整年份
+			console.log(d); // IE：Mon Aug 01 1921 12:34:56 GMT+0800 (中国标准时间)
+			
+			// 2、Date方法
+			// ### getDate()			
+			// 获取当前日期对象是几日
+			d = new Date();
+			var date = d.getDate();
+			console.log("date = " + date); // date = 30
+			// ### getDay()
+			// 获取当前日期对象时周几，会返回一个0-6的值
+			// - 0表示周日
+			// - 1表示周一
+			var day = d.getDay();
+			console.log("day = " + day); // day = 5
+			// ### getMonth()
+			// 获取当前时间对象的月份-会返回一个**0-11**的值
+			// - 0 表示 1月
+			// - 1 表示 2月
+			// - ......
+			// - 11 表示 12月
+			var month = d.getMonth();
+			console.log("month = " + month); // month = 6
+			console.log("month = " + (month + 1)); // month = 7
+			// ### getFullYear()
+			// 获取当前日期对象的年份
+			var year = d.getFullYear();
+			console.log("year = " + year); // year = 2021
+			// ### 其他
+			var hour = d.getHours();
+			var minute = d.getMinutes();
+			var second = d.getSeconds();
+			var mmilliSecond = d.getMilliseconds();
+			console.log("hour = " + hour); // hour = 22
+			console.log("minute = " + minute); // minute = 21
+			console.log("second = " + second); // second = 11
+			console.log("mmilliSecond = " + mmilliSecond); // mmilliSecond = 149
+			// ### getTime()
+			// -获取当前日期对象的时间戳
+			// 时间戳，指的是从格林威治标准时间的**1970年1月1日0时0分0秒**到当前日期所花费的毫秒数
+			// 示例：表示从1970年1月1日0时0分0秒到2021年22时25分26秒所花费的毫秒数
+			var time = d.getTime();
+			console.log(d); // Fri Jul 30 2021 22:25:26 GMT+0800 (中国标准时间)
+			console.log("time = " + time); // time = 1627655017435
+			var d2 = new Date("01/01/1970 00:00:00");
+			var time = d2.getTime();
+			console.log("time = " + time); // time = -28800000
+			console.log("距离格林威治时间还有" + -time/1000/60/60 + "小时"); // 距离格林威治时间还有8小时
+			// 获取当前的时间戳
+			var currentTime = Date.now();
+			console.log("currentTime = " + currentTime); // currentTime = 1627655852125
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
