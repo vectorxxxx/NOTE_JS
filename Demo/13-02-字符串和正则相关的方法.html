@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>字符串和正则相关的方法</title>
+		<script type="text/javascript">
+			// ### split()
+			// 可以将一个字符串拆分为一个数组
+			// 方法中可以传递一个正则表达式作为参数，这样方法将会根据正则表达式去拆分字符串
+			var str = "1a2b3c4d5e6f7g8h9i0";
+			var result = str.split(/[A-z]/); // 根据任意字母来将字符串拆分
+			console.log(str); // 1a2b3c4d5e6f7g8h9i0
+			console.log(result); // ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+			
+			// ### search()
+			// 可以搜索字符串中是否含有指定内容
+			// 如果搜索到指定内容，则会返回第一次出现的索引，如果没有搜索到返回-1
+			// 它可以接受一个正则表达式作为参数，然后会根据正则表达式去检索字符串
+			str = "Hello abc Hello afc agc";
+			result = str.search(/a[A-z]c/);
+			console.log(str); // 1a2b3c4d5e6f7g8h9i0
+			console.log(result); // 6
+
+			// ### match()
+			// 可以根据正则表达式，从一个字符串中将符合条件的内容提取出来
+			// 默认情况下我们的match只会找到第一个符合要求的内容，找到以后就停止检索
+			str = "1a2b3c4d5e6A7B8C9D0";
+			result = str.match(/[a-z]/);
+			console.log(str); // 1a2b3c4d5e6f7g8h9i0
+			console.log(result); // ["a", index: 1, input: "1a2b3c4d5e6A7B8C9D0", groups: undefined]
+			// 可以设置正则表达式为全局匹配模式，这样就会匹配到所有的内容
+			result = str.match(/[a-z]/g); 
+			console.log(result); // ["a", "b", "c", "d", "e"]
+			// 可以为一个正则表达式设置多个匹配模式，且顺序无所谓
+			result = str.match(/[a-z]/ig);
+			console.log(result); // ["a", "b", "c", "d", "e", "A", "B", "C", "D"]
+			// `match()`会将匹配到的内容封装到一个数组中返回，即使只查询到一个结果
+			console.log(Array.isArray(result)); // true
+			console.log(result[0]); // a
+			console.log(result[5]); // A
+			
+			// ### replace()
+			// 可以将字符串中指定内容替换为新的内容
+			// 参数：
+			// 1. 被替换的内容，可以接受一个正则表达式作为参数
+			// 2. 新的内容
+			result = str.replace("a","@_@");
+			console.log(str); // 1a2b3c4d5e6A7B8C9D0
+			console.log(result); // 1@_@2b3c4d5e6A7B8C9D0
+			// 默认只会替换第一个，可以使用正则表达式的全局匹配模式
+			str = "1a2a3a4a5a6A7B8C9D0";
+			result = str.replace("a","@_@");
+			console.log(result); // 1@_@2a3a4a5a6A7B8C9D0
+			result = str.replace(/a/g,"@_@");
+			console.log(result); // 1@_@2@_@3@_@4@_@5@_@6A7B8C9D0
+			result = str.replace(/a/gi,"@_@");
+			console.log(result); // 1@_@2@_@3@_@4@_@5@_@6@_@7B8C9D0
+			result = str.replace(/[a-z]/gi,"@_@");
+			console.log(result); // 1@_@2@_@3@_@4@_@5@_@6@_@7@_@8@_@9@_@0
+			result = str.replace(/[a-z]/gi,"");
+			console.log(result); // 1234567890
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

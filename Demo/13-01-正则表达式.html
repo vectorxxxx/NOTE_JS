@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>正则表达式</title>
+		<script type="text/javascript">
+			// ## 1、正则对象
+			// 语法：`var 变量 = new RegExp("正则表达式", "匹配模式");`
+			var reg = new RegExp("a"); // 这个正则表达式可以来检查一个字符串中是否含有a
+			// 使用typeof检查正则对象，会返回object
+			console.log(typeof reg); // object
+			console.log(reg); // /a/
+			
+			
+			
+			// ## 2、正则方法
+			// 正则表达式的方法：`test()`
+			// 使用这个方法可以用来检查一个字符串是否符合正则表达式的规则，如果符合则返回true，否则返回false
+			var result = reg.test("abd");
+			console.log(result); // true
+			result = reg.test("hgf");
+			console.log(result); // false
+			result = reg.test("Abd");
+			console.log(result); // false
+			
+			// 在构造函数中可以传递一个匹配模式作为第二个参数，可以是
+			// - `i` ignoreCase，忽略大小写
+			// - `g` global，全局匹配模式
+			reg = new RegExp("a","i");
+			result = reg.test("Abd");
+			console.log(result); // true
+			
+			
+			
+			// ## 3、正则语法
+			// 使用字面量来创建正则表达式，语法：`var 变量 = /正则表达式/匹配模式;`
+			// 使用字面量的方式创建更加简单；使用构造函数创建更加灵活
+			reg = /a/i;
+			result = reg.test("Abd");
+			console.log(result); // true
+			
+			// 或
+			// 使用`|`表示或者的意思
+			reg = /a|b|c/i; // 创建一个正则表达式，检查一个字符串中是否有a或b或c
+			result = reg.test("Abcd");
+			console.log(result); // true
+			result = reg.test("bcd");
+			console.log(result); // true
+			result = reg.test("cd");
+			console.log(result); // true
+			result = reg.test("d");
+			console.log(result); // false
+			
+			// `[]`里的内容也是或的关系：`[abc] == a|b|c`
+			reg = /[abc]/i;
+			result = reg.test("bcd");
+			console.log(result); // true
+			
+			// [a-z]任意小写字母
+			reg = /[a-z]/;
+			result = reg.test("Abc");
+			console.log(result); // true
+			result = reg.test("ABC");
+			console.log(result); // false
+			// `[A-Z]`任意大写字母
+			reg = /[A-Z]/;
+			result = reg.test("abc");
+			console.log(result); // false
+			result = reg.test("ABC");
+			console.log(result); // true
+			// `[A-z]`任意字母
+			reg = /[A-z]/;
+			result = reg.test("abc");
+			console.log(result); // true
+			result = reg.test("ABC");
+			console.log(result); // true
+			
+			// **练习1：**检查一个字符串中是否含有abc或adc或aec
+			reg = /a[bde]c/;
+			result = reg.test("adc");
+			console.log(result); // true
+			result = reg.test("addc");
+			console.log(result); // false
+			
+			// `[^ ]`除了
+			reg = /[^a]/; // 除了a以外的字符
+			result = reg.test("a");
+			console.log(result); // false
+			result = reg.test("b");
+			console.log(result); // true
+			
+			// `[0-9]`任意数字
+			reg = /[0-9]/;
+			result = reg.test("123");
+			console.log(result); // true
+			result = reg.test("abc");
+			console.log(result); // false
+			// `[^0-9]`除了数字
+			reg = /[^0-9]/;
+			result = reg.test("123");
+			console.log(result); // false
+			result = reg.test("abc");
+			console.log(result); // true
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
