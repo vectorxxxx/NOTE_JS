@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>元字符</title>
+		<script type="text/javascript">
+			// 检查一个字符串中是否含有.
+			var reg = /./;
+			console.log(reg.test("ab")); // true
+			console.log(reg.test("a.b")); // true
+			// .表示任意字符
+			// 在正则表达式中使用`\`作为转义字符
+			// `\.`来表示`.`
+			reg = /\./;
+			console.log(reg.test("ab")); // false
+			console.log(reg.test("a.b")); // true
+			// `\\`表示`\`
+			reg = /\\/;
+			console.log(reg.test("ab")); // false
+			console.log(reg.test("a\b")); // false
+			// console.log(reg.test("a\")); // Uncaught SyntaxError: Invalid or unexpected token
+			console.log(reg.test("a\\b")); // true
+			
+			// 注意：使用构造函数时，由于它的参数是一个字符串，而`\`是字符串中转义字符	
+			reg = new RegExp("\."); // 相当于 reg = /./，即包含任意字符
+			console.log(reg); //  /./
+			console.log(reg.test("ab")); // true
+			console.log(reg.test("a\b")); // true
+			console.log(reg.test("a\\b")); // true
+			console.log(reg.test("a.b")); // true
+			// 如果要使用`\\`则需要使用`\`来代替
+			reg = new RegExp("\\."); // 相当于 reg = /\./，即包含`.`
+			console.log(reg); //  /\./
+			console.log(reg.test("ab")); // false
+			console.log(reg.test("a\b")); // false
+			console.log(reg.test("a\\b")); // false
+			console.log(reg.test("a.b")); // true
+			// 如果要使用`\\`，则需要使用`\\\\`来代替
+			reg = new RegExp("\\\\."); // 相当于 reg = /\\./，即包含`\任意字符`
+			console.log(reg); //  /\\./
+			console.log(reg.test("ab")); // false
+			console.log(reg.test("a\b")); // false
+			console.log(reg.test("a\\b")); // true
+			console.log(reg.test("a.b")); // false
+			
+			
+			// - `\w	`任意字母、数字、`_`，相当于`[A-z0-9_]`
+			reg = /\w/;
+			console.log(reg.test("abc")); // true
+			console.log(reg.test(123)); // true
+			console.log(reg.test("_")); // true
+			console.log(reg.test("!@#$%^&*()")); // false
+			// - `\W	`除了字母、数字、`_`，相当于`[^A-z0-9_]`
+			reg = /\W/;
+			console.log(reg.test("abc")); // false
+			console.log(reg.test(123)); // false
+			console.log(reg.test("_")); // false
+			console.log(reg.test("!@#$%^&*()")); // true
+			
+			// - `\d	`任意数字，相当于`[0-9]`
+			reg = /\d/;
+			console.log(reg.test("abc")); // false
+			console.log(reg.test(123)); // true
+			console.log(reg.test("_")); // false
+			console.log(reg.test("!@#$%^&*()")); // false
+			// - `\D	`除了数字，相当于`[^0-9]`
+			reg = /\D/;
+			console.log(reg.test("abc")); // true
+			console.log(reg.test(123)); // false
+			console.log(reg.test("_")); // true
+			console.log(reg.test("!@#$%^&*()")); // true
+			
+			// - `\s	`空格
+			reg = /\s/;
+			console.log(reg.test("abc")); // false
+			console.log(reg.test(123)); // false
+			console.log(reg.test("_")); // false
+			console.log(reg.test("!@#$%^&*()")); // false
+			console.log(reg.test("d35@ d")); // true
+			// - `\S	`除了空格
+			reg = /\S/;
+			console.log(reg.test("abc")); // true
+			console.log(reg.test(123)); // true
+			console.log(reg.test("_")); // true
+			console.log(reg.test("!@#$%^&*()")); // true
+			console.log(reg.test(" ")); // false
+			
+			// `\b	`单词边界
+			// 创建一个正则表达式检查一个字符串中是否含有单词child
+			reg = /child/;
+			console.log(reg.test("child")); // true
+			console.log(reg.test("hello children")); // true
+			reg = /\bchild\b/;
+			console.log(reg.test("child")); // true
+			console.log(reg.test("hello children")); // false
+			console.log(reg.test("hello child ren")); // true
+			// `\B	`除了单词边界
+			reg = /\Bchild\b/;
+			console.log(reg.test("child")); // false
+			console.log(reg.test("hello children")); // false
+			console.log(reg.test("hello child ren")); // false
+			console.log(reg.test("hellochild ren")); // true
+			
+			// 接收一个用户的输入
+			var str = "    hello world  ";
+			console.log(str); //     hello world  
+			// 去除掉字符串中的空格
+			// 去除空格就是使用""来替换空格
+			var result = str.replace(/\s/g,""); 
+			console.log(result); // helloworld  
+			// 去除前面的空格
+			result = str.replace(/^\s+/,""); 
+			console.log(result); // hello world  
+			// 去除后面的空格
+			result = str.replace(/\s+$/,""); 
+			console.log(result); //     hello world
+			// 去除前面和后面的空格
+			result = str.replace(/^\s+|\s$/g,""); 
+			console.log(result); // hello world
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

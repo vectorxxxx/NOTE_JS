@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>邮件正则</title>
+		<script type="text/javascript">
+			// ## 邮件正则
+			// `任意字母数字下划线(.任意字母数字下划线){0个或多个}@任意字母数字.任意字母（2-5位）(.任意字母（2-5位）){0个或多个}`
+			var reg = /^\w+(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5})+$/;
+			str = "Vector123_.xxx.163@outLOOK123.Com.cn";
+			console.log(reg.test(str)); // true
+			str = "Vector123_.xxx.163@outLOOK123.com123.cn";
+			console.log(reg.test(str)); // false
+			str = "#$%^&*()Vector123_.xxx.163@outLOOK123.com123.cn";
+			console.log(reg.test(str)); // false
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
