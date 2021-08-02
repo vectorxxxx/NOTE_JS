@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片切换</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			
+			.outer{
+				width: 500px;
+				margin: 50px auto;
+				padding: 10px;
+				background-color: greenyellow;
+				/* 文本居中：内联样式当成是文本 */
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				// 上一张
+				var prev = document.getElementById("prev");
+				// 下一张
+				var next = document.getElementById("next");
+				// 图片
+				var img = document.getElementsByTagName("img")[0];
+				// 信息
+				var info = document.getElementById("info");
+				// 图片集合
+				var imgArr = ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg"];
+				// 记录第几张
+				var index = 0;
+				// 上一张绑定单击相应事件
+				prev.onclick = function(){
+					// 循环切换
+					index = (index < 0) ? imgArr.length - 1 : index;
+					// 修改img的src属性，以切换图片
+					img.src = imgArr[index];
+					// 修改文字提示
+					info.innerHTML = "共" + imgArr.length + "张图片，当前第" + (index + 1) + "张";
+					// 切换上一张
+					index--;
+				};
+				// 下一张绑定单击相应事件
+				next.onclick = function(){
+					// 循环切换			
+					index = (index > imgArr.length - 1) ? 0 :index;
+					// 修改img的src属性，以切换图片
+					img.src = imgArr[index];
+					// 修改文字提示
+					info.innerHTML = "共" + imgArr.length + "张图片，当前第" + (index + 1) + "张";
+					// 切换下一张
+					index++;
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<div class="outer">
+			<p id="info">共5张图片，当前第1张</p>
+			<img src="img/1.jpg" alt="冰棍"/>
+			<button type="button" id="prev">上一张</button>
+			<button type="button" id="next">下一张</button>
+		</div>
+	</body>
+</html>

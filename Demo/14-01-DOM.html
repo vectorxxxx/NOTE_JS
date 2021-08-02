@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>DOM</title>
+		<script type="text/javascript">
+			window.onload = function(){
+				// 获取button对象
+				var btn = document.getElementById("btn");
+				console.log(btn); // <button type="button" id="btn">我是一个按钮</button>
+				// 修改btn的文本节点内容
+				btn.innerHTML = "I'm a button.";
+						   
+				// 绑定一个单击事件
+				btn.onclick = function(){
+					alert("Don't touch me.");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- <button type="button" id="btn" onclick="alert('Fuck');">我是一个按钮</button> -->
+		<button type="button" id="btn">我是一个按钮</button>
+
+	</body>
+</html>

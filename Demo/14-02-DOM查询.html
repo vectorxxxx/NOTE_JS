@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/css.css">
+    <title>DOM查询</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 1、查找#bj节点
+			// 为id为btne1的按钮绑定一个单击响应函数
+            document.getElementById("btn01").onclick = function () {
+				// innerHTML 通过这个属性可以获取到元素内部的html代码
+                alert(document.getElementById("bj").innerHTML);
+            };
+
+            // 2、查找所有1i节点
+            document.getElementById("btn02").onclick = function () {
+				// getElementsByTagName()可以根据标签名来获取一组元素节点对象
+				// 这个方法会给我们返回一个类数组对象，所有查询到的元素都会封装到对象中
+				// 即使查询到的元素只有一个，也会封装到数组中返回
+                var li_list = document.getElementsByTagName("li");
+				console.log(li_list); // HTMLCollection(11) [li#bj, li, li, li, li#rl, li, li, li, li, li#android, li, bj: li#bj, rl: li#rl, android: li#android]
+				var arr = [];
+                for(var i=0;i<li_list.length;i++){
+					arr.push(li_list[i].innerHTML);
+				}
+				alert(arr);
+            };
+			
+            // 3、查找name=gender的所有节点
+			document.getElementById("btn03").onclick = function () {
+				var inputs = document.getElementsByName("gender");
+				console.log(inputs); // NodeList(2) [input.hello, input.hello]
+				var arr = [];
+				for(var i=0;i<inputs.length;i++){
+					// innerHTML用于获取元素内战的HTML代码的
+					// 如果需要读取元素节点属性，直接使用`元素.属性名`
+					// 例子：`元素.id`  `元素.name`  `元素.value`
+					arr.push(inputs[i].value); 
+					// 注意：class属性不能采用这种方式，读取class属性时需要使用`元素.className`
+					arr.push(inputs[i].className);
+				}
+				alert(arr);
+			}
+            // 4、查找#city下所有1i节点
+            // 5、返回#city的所有子节点
+            // 6、返回#phone的第一个子节点
+            // 7、返回#bj的父节点
+            // 8、返回#android的前一个兄弟节点
+            // 9、读取#username的value属性值
+            // 10、设置#username的value属性值
+            // 11、返回#bj的文本值
+        };
+    </script>
+</head>
+
+<body>
+    <div id="total">
+        <div class="inner">
+            <p>
+                你喜欢哪个城市?
+            </p>
+
+            <ul id="city">
+                <li id="bj">北京</li>
+                <li>上海</li>
+                <li>东京</li>
+                <li>首尔</li>
+            </ul>
+
+            <br>
+            <br>
+
+            <p>
+                你喜欢哪款单机游戏?
+            </p>
+
+            <ul id="game">
+                <li id="rl">红警</li>
+                <li>实况</li>
+                <li>极品飞车</li>
+                <li>魔兽</li>
+            </ul>
+
+            <br />
+            <br />
+
+            <p>
+                你手机的操作系统是?
+            </p>
+
+            <ul id="phone">
+                <li>IOS</li>
+                <li id="android">Android</li>
+                <li>Windows Phone</li>
+            </ul>
+        </div>
+
+        <div class="inner">
+            gender:
+            <input class="hello" type="radio" name="gender" value="male" />
+            Male
+            <input class="hello" type="radio" name="gender" value="female" />
+            Female
+            <br>
+            <br>
+            name:
+            <input type="text" name="name" id="username" value="abcde" />
+        </div>
+    </div>
+    <div id="btnList">
+        <div><button id="btn01">查找#bj节点</button></div>
+        <div><button id="btn02">查找所有li节点</button></div>
+        <div><button id="btn03">查找name=gender的所有节点</button></div>
+        <div><button id="btn04">查找#city下所有li节点</button></div>
+        <div><button id="btn05">返回#city的所有子节点</button></div>
+        <div><button id="btn06">返回#phone的第一个子节点</button></div>
+        <div><button id="btn07">返回#bj的父节点</button></div>
+        <div><button id="btn08">返回#android的前一个兄弟节点</button></div>
+        <div><button id="btn09">返回#username的value属性值</button></div>
+        <div><button id="btn10">设置#username的value属性值</button></div>
+        <div><button id="btn11">返回#bj的文本值</button></div>
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>
