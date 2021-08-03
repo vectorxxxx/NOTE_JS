@@ -174,42 +174,56 @@ window.onload = function(){
 
 ### 获取元素节点
 
+![image-20210803222352914](https://i.loli.net/2021/08/03/tuBpZTmWkhsE6nV.png)
+
 通过document对象调用
+
+为了方便，定义一个通用的函数，专门用来为指定元素绑定单击响应函数
+
+```javascript
+// 参数：
+// 	idstr	要绑定单击响应函数的对象的id属性值
+// 	fun		事件的回调函数，当单击元素时，该函数将会被触发
+function myClick(idStr, fun){
+    var btn = document.getElementById(idStr);
+    btn.onclick = fun;
+}
+```
 
 - `getElementById()` 通过id属性获取**一个**元素节点对象
 
   ```javascript
-  // 1、查找#bj节点
-  // 为id为btne1的按钮绑定一个单击响应函数
-  document.getElementById("btn01").onclick = function () {
+  myClick("btn01", function () {
       // innerHTML 通过这个属性可以获取到元素内部的html代码
-      alert(document.getElementById("bj").innerHTML);
-  };
+      alert(document.getElementById("bj").innerHTML); // 北京
+  });
   ```
-
+  
 - `getElementsByTagName()` 通过标签名获取**一组**元素节点对象
 
   ```javascript
-  document.getElementById("btn02").onclick = function () {
+  myClick("btn02", function () {
       // getElementsByTagName()可以根据标签名来获取一组元素节点对象
       // 这个方法会给我们返回一个类数组对象，所有查询到的元素都会封装到对象中
       // 即使查询到的元素只有一个，也会封装到数组中返回
       var li_list = document.getElementsByTagName("li");
-      console.log(li_list); // HTMLCollection(11) [li#bj, li, li, li, li#rl, li, li, li, li, li#android, li, bj: li#bj, rl: li#rl, android: li#android]
+      alert(li_list.length); // 14
+      
       var arr = [];
       for(var i=0;i<li_list.length;i++){
           arr.push(li_list[i].innerHTML);
       }
-      alert(arr);
-  };
+      alert(arr); // 北京,上海,东京,首尔,红警,实况,极品飞车,魔兽,IOS,Android,Windows Phone,IOS,Android,Windows Phone
+  });
   ```
-
+  
 - `getElementsByName()` 通过name属性获取**一组**元素节点对象
 
   ```javascript
-  document.getElementById("btn03").onclick = function () {
+  myClick("btn03", function () {
       var inputs = document.getElementsByName("gender");
-      console.log(inputs); // NodeList(2) [input.hello, input.hello]
+      alert(inputs.length); // 2
+      
       var arr = [];
       for(var i=0;i<inputs.length;i++){
           // innerHTML用于获取元素内战的HTML代码的
@@ -219,8 +233,8 @@ window.onload = function(){
           // 注意：class属性不能采用这种方式，读取class属性时需要使用`元素.className`
           arr.push(inputs[i].className);
       }
-      alert(arr);
-  }
+      alert(arr); // male,hello,female,hello
+  });
   ```
 
 **练习：图片切换**
@@ -296,3 +310,167 @@ next.onclick = function(){
 效果
 
 ![图片切换](https://i.loli.net/2021/08/02/iMh6CoVk4rq7jzO.gif)
+
+### 获取元素节点的子节点
+
+![image-20210803222419830](https://i.loli.net/2021/08/03/wRicLYSWEshzxBX.png)
+
+通过具体的元素节点调用
+
+- `getElementsByTagName()`方法，返回当前节点的指定标签名后代节点
+
+  ```javascript
+  myClick("btn04", function () {
+      var city = document.getElementById("city");
+      // 获取city下1i节点
+      var list = city.getElementsByTagName("li");
+      alert(list.length); // 4
+      
+      var arr = [];
+      for(var i=0;i<list.length;i++){
+          arr.push(list[i].innerHTML);
+      }
+      alert(arr); // 北京,上海,东京,首尔
+  });
+  ```
+
+- `childNodes`属性，表示当前节点的所有子节点
+
+  ```javascript
+  myClick("btn05", function () {
+      var city = document.getElementById("city");
+      // childNodes属性会获取包括文本节点在内的所有节点
+      // 根据DOM标签标签间空白也会当成文本节点
+      // 注意：在IE8及以下的浏览器中，不会将空白文本当成子节点
+      // 所以该属性在IE8中会返回4个子元素，而其他浏览器是9个
+      var list = city.childNodes;
+      alert(list.length); // 9
+      
+      var arr = [];
+      for(var i=0;i<list.length;i++){
+          arr.push(list[i]);
+      }
+      alert(arr); // [object Text],[object HTMLLIElement],[object Text],[object HTMLLIElement],[object Text],[object HTMLLIElement],[object Text],[object HTMLLIElement],[object Text]
+  });
+  myClick("btn05", function () {
+      var city = document.getElementById("city");
+      // children属性可以获取当前元素的所有子元素
+      var list = city.children;
+      alert(list.length); // 4
+      
+      var arr = [];
+      for(var i=0;i<list.length;i++){
+          arr.push(list[i].innerHTML);
+      }
+      alert(arr); // 北京,上海,东京,首尔
+  });
+  ```
+
+- `firstChild`属性，表示当前节点的第一个子节点
+
+  ```javascript
+  myClick("btn06", function () {
+      var phone = document.getElementById("phone");
+      // firstChild可以获取到当前元素的第一个子节点（包括空白文本节点）
+      var firstChild = phone.firstChild;				
+      alert(firstChild); // [object HTMLLIElement]
+      alert(firstChild.innerHTML); // IOS
+  });
+  myClick("btn06", function () {
+      var phone2 = document.getElementById("phone2");
+      // firstChild可以获取到当前元素的第一个子节点（包括空白文本节点）
+      var firstChild = phone2.firstChild;				
+      alert(firstChild); // [object Text]
+      alert(firstChild.innerHTML); // undefined
+  });
+  myClick("btn06", function () {
+      var phone2 = document.getElementById("phone2");
+      // firstElementchild不支持IE8及以下的浏览器，如果需要兼容他们尽量不要使用
+      var firstElementChild = phone2.firstElementChild;				
+      alert(firstElementChild); // [object HTMLLIElement]
+      alert(firstElementChild.innerHTML); // IOS
+  });
+  ```
+
+- `lastChild`属性，表示当前节点的最后一个子节点
+
+  ```javascript
+  document.getElementById("btn062").onclick = function () {
+      var phone = document.getElementById("phone");
+      // children属性可以获取当前元素的所有子元素
+      var lastChild = phone.lastChild;				
+      alert(lastChild); // [object HTMLLIElement]
+      alert(lastChild.innerHTML); // Windows Phone
+  });
+  ```
+
+### 获取父节点和兄弟节点
+
+![image-20210803222448362](https://i.loli.net/2021/08/03/go8P6iSVcHqYzLU.png)
+
+通过具体的节点调用
+
+- `parentNode`属性，表示当前节点的父节点
+
+  ```javascript
+  myClick("btn07", function () {
+      var bj = document.getElementById("bj");
+      var parentNode = bj.parentNode;				
+      alert(parentNode); // [object HTMLUListElement]
+      alert(parentNode.innerHTML);
+      // <li id="bj">北京</li>
+      // <li>上海</li>
+      // <li>东京</li>
+      // <li>首尔</li>
+      
+      // innerText
+      // -该属性可以获取到元素内部的文本内容
+      // -它和innerHTML类似，不同的是它会自动将htm1去除
+      alert(parentNode.innerText);
+      // 北京
+      // 上海
+      // 东京
+      // 首尔
+  });
+  ```
+
+- `previousSibling`属性，表示当前节点的前一个兄弟节点
+
+  ```javascript
+  myClick("btn08", function () {
+      var android = document.getElementById("android");
+      // 返回#android的前一个兄弟节点（也可能获取到空白的文本）
+      var previousSibling = android.previousSibling;				
+      alert(previousSibling); // [object HTMLLIElement]
+      alert(previousSibling.innerHTML); // IOS
+  });
+  myClick("btn08", function () {
+      var android2 = document.getElementById("android2");
+      // 返回#android的前一个兄弟节点（也可能获取到空白的文本）
+      var previousSibling = android2.previousSibling;				
+      alert(previousSibling); // [object Text]
+      alert(previousSibling.innerHTML); // undefined
+  });
+  myClick("btn08", function () {
+      var android2 = document.getElementById("android2");
+      // previousElementSibling获取前一个兄弟元素，IE8及以下不支持
+      var previousElementSibling = android2.previousElementSibling;				
+      alert(previousElementSibling); // [object HTMLLIElement]
+      alert(previousElementSibling.innerHTML); // IOS
+  });
+  ```
+
+- `nextSibling`属性，表示当前节点的后一个兄弟节点
+
+  ```javascript
+  myClick("btn082", function () {
+      var android = document.getElementById("android");
+      // 返回#android的前一个兄弟节点（也可能获取到空白的文本）
+      var nextSibling = android.nextSibling;				
+      alert(nextSibling); // [object HTMLLIElement]
+      alert(nextSibling.innerHTML); // Windows Phone
+  });
+  ```
+
+  
+
