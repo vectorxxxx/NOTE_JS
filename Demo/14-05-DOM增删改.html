@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>DOM增删改</title>
+		<link rel="stylesheet" type="text/css" href="css/css2.css" />
+		<script type="text/javascript">
+			window.onload = function() {	
+				// 创建一个"广州"节点,添加到#city下
+				var city = document.getElementById("city");
+				myClick("btn01",function(){
+					// 创建元素节点
+					var li = document.createElement("li");
+					// 创建文本节点
+					var gz = document.createTextNode("广州");
+					// 将文本节点添加到元素节点中
+					li.appendChild(gz);
+					// 将元素节点添加至#city下
+					city.appendChild(li);
+				});
+				
+				// 将"广州"节点插入到#bj前面	
+				var bj = document.getElementById("bj");
+				myClick("btn02",function(){
+					var li = document.createElement("li");
+					var gz = document.createTextNode("广州");
+					li.appendChild(gz);
+					// 将元素节点插入到#bj前面
+					city.insertBefore(li,bj);
+				});
+				
+				// 使用"广州"节点替换#bj节点
+				myClick("btn03",function(){
+					var li = document.createElement("li");
+					var gz = document.createTextNode("广州");
+					li.appendChild(gz);
+					// 将元素节点替换#bj节点
+					city.replaceChild(li,bj);
+				});
+				
+				// 删除#bj节点
+				myClick("btn04",function(){
+					// 将元素节点替换#bj节点
+					// city.removeChild(bj);
+					// 更常用，不需要知道父节点是什么
+					bj.parentNode.removeChild(bj);
+				});
+
+				// 读取#city内的HTML代码
+				myClick("btn05",function(){
+					console.log(city.innerHTML);
+				});
+
+				// 设置#bj内的HTML代码
+				myClick("btn06",function(){
+					bj.innerHTML = "朝阳";
+				});
+				
+				// 使用innerHTML将"广州"节点添加到#city下
+				myClick("btn07",function(){
+					// 使用innerHTML也可以完成DOM的增删改的相关操作
+					// city.innerHTML += "<li>广州</li>";
+					// 不过这种方式会先删除再替换，耗费性能，所以一般我们会两种方式结合使用
+					var li = document.createElement("li");
+					li.innerHTML = "广州";
+					city.appendChild(li);
+				});
+			};
+			
+			function myClick(idStr, fun) {
+				var btn = document.getElementById(idStr);
+				btn.onclick = fun;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="total">
+					<div class="inner">
+						<p>
+							你喜欢哪个城市?
+						</p>
+		
+						<ul id="city">
+							<li id="bj">北京</li>
+							<li>上海</li>
+							<li>东京</li>
+							<li>首尔</li>
+						</ul>
+						
+					</div>
+				</div>
+				<div id="btnList">
+					<div><button id="btn01">创建一个"广州"节点,添加到#city下</button></div>
+					<div><button id="btn02">将"广州"节点插入到#bj前面</button></div>
+					<div><button id="btn03">使用"广州"节点替换#bj节点</button></div>
+					<div><button id="btn04">删除#bj节点</button></div>
+					<div><button id="btn05">读取#city内的HTML代码</button></div>
+					<div><button id="btn06">设置#bj内的HTML代码</button></div>
+					<div><button id="btn07">创建一个"广州"节点,添加到#city下</button></div>
+				</div>
+	</body>
+</html>

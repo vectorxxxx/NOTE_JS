@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>DOM剩余方法</title>
+		<script type="text/javascript">
+			window.onload = function(){				
+				var body = document.getElementsByTagName("body");
+				console.log(body); // HTMLCollection [body]
+				body = document.body;
+				console.log(body);
+				
+				var html = document.documentElement;
+				console.log(html);
+				
+				var all = document.all;
+				console.log(all); // HTMLAllCollection(11) [html, head, meta, title, script, script, script, body, script, script, script]
+				console.log(all.length); // 11
+				console.log(typeof all); // undefined
+				for(var i=0;i<all.length;i++){
+					console.log(all[i]);
+				}
+				
+				var el = document.getElementsByTagName("*");
+				console.log(el); // HTMLCollection(11) [html, head, meta, title, script, script, script, body, script, script, script]
+				console.log(el.length); // 14
+				console.log(typeof el); // object
+				
+				// 根据元素的class属性值查询一组元素节点对象
+				var boxs = document.getElementsByClassName("box");
+				console.log(boxs); // HTMLCollection(3) [div.box, div.box, div.box]
+				console.log(boxs.length); // 3
+				console.log(typeof boxs); // object
+				
+				
+				// document.querySelector()
+				// -需要一个选择器的字符串作为参数，可以根据一个CSS选择器来查询一个元素节点对象
+				var div = document.querySelector(".box div");
+				console.log(div.innerHTML); // I'm first div.
+				boxs = document.querySelector(".box");
+				console.log(boxs); 
+				// <div class="box">
+				// 		<div>I'm first div.</div>
+				// </div>
+				
+				// document.querySelectorAll()
+				boxs = document.querySelectorAll(".box");
+				console.log(boxs); // NodeList(3) [div.box, div.box, div.box]
+				console.log(boxs.length); //3
+			};
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<div>I'm first div.</div>
+		</div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</body>
+</html>

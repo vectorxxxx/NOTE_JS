@@ -474,3 +474,291 @@ next.onclick = function(){
 
   
 
+## 6、全选练习
+
+**HTML代码**
+
+```html
+<form method="post" action="">
+    你爱好的运动是？<input type="checkbox" id="checkedAllBox" />全选/全不选 
+
+    <br />
+    <input type="checkbox" name="items" value="足球" />足球
+    <input type="checkbox" name="items" value="篮球" />篮球
+    <input type="checkbox" name="items" value="羽毛球" />羽毛球
+    <input type="checkbox" name="items" value="乒乓球" />乒乓球
+    <br />
+    <input type="button" id="checkedAllBtn" value="全　选" />
+    <input type="button" id="checkedNoBtn" value="全不选" />
+    <input type="button" id="checkedRevBtn" value="反　选" />
+    <input type="button" id="sendBtn" value="提　交" />
+</form>
+```
+
+### 全选
+
+```javascript
+document.getElementById("checkedAllBtn").onclick = function(){
+    var items = document.getElementsByName("items");
+    for(var i=0;i<items.length;i++){
+        // 通过多选框的checked属性可以来获取或设置多选框的选中状态
+        items[i].checked = true;
+    }
+    // 全选按钮也要同步选中
+    document.getElementById("checkedAllBox").checked = true;
+}
+```
+
+### 全不选
+
+```javascript
+document.getElementById("checkedNoBtn").onclick = function(){
+    var items = document.getElementsByName("items");
+    for(var i=0;i<items.length;i++){
+        items[i].checked = false;
+    }
+    // 全选按钮也要同步不选中
+    document.getElementById("checkedAllBox").checked = false;
+}
+```
+
+### 反选
+
+```javascript
+document.getElementById("checkedRevBtn").onclick = function(){
+    var items = document.getElementsByName("items");
+    var flag = true;
+    for(var i=0;i<items.length;i++){
+        items[i].checked = !items[i].checked;
+        if(!items[i].checked){
+            flag = false;
+        }
+    }
+    // 全选按钮也要同步选中或不选中
+    document.getElementById("checkedAllBox").checked = flag;
+}
+```
+
+### 提交
+
+```javascript
+document.getElementById("sendBtn").onclick = function(){
+    var items = document.getElementsByName("items");
+    var arr = [];
+    for(var i=0;i<items.length;i++){
+        if(items[i].checked){
+            arr.push(items[i].value);
+        }
+    }
+    alert(arr);
+}
+```
+
+### 全选/全不选
+
+```javascript
+document.getElementById("checkedAllBox").onclick = function(){
+    var items = document.getElementsByName("items");
+    for(var i=0;i<items.length;i++){
+        // 在事件的响应函数中，响应函数是给谁绑定的this就是谁
+        items[i].checked = this.checked; 
+    }
+}
+```
+
+### items
+
+```javascript
+var flag;
+var items = document.getElementsByName("items");
+for(var i=0;i<items.length;i++){
+    items[i].onclick = function(){
+        flag = true;
+        for(var j=0;j<items.length;j++){
+            if(!items[j].checked){
+                flag = false;
+                break;
+            }
+        }
+        document.getElementById("checkedAllBox").checked = flag;
+    }
+}
+```
+
+**效果**
+
+![image-20210804215409752](https://i.loli.net/2021/08/04/bGFQ2ZXTJDBwCAo.png)
+
+![image-20210804215455471](https://i.loli.net/2021/08/04/iHnB9SytKUFWw6V.png)
+
+![image-20210804215513918](https://i.loli.net/2021/08/04/HCpfRazkY3sEAcS.png)
+
+
+
+## 7、DOM查询的剩余方法
+
+### document.body
+
+在`document`中有一个属性`body`，它保存的是`body`的引用
+
+```javascript
+// 注意：如果script标签是定义在head中的，则这里需要window.onload = function(){}包裹，否则会出现null的情况
+var body = document.getElementsByTagName("body");
+console.log(body); // HTMLCollection [body]
+body = document.body;
+console.log(body); // <body></body>
+console.log(typeof body); // object
+```
+
+### document.documentElement
+
+`document.documentElement`保存的是`html`根标签
+
+```javascript
+var html = document.documentElement;
+console.log(html);
+```
+
+### document.all
+
+`document.all`代表页面中所有的元素
+
+```javascript
+var all = document.all;
+console.log(all); // HTMLAllCollection(11) [html, head, meta, title, script, script, script, body, script, script, script]
+console.log(all.length); // 11
+console.log(typeof all); // undefined
+for(var i=0;i<all.length;i++){
+    console.log(all[i]);
+}
+
+var el = document.getElementsByTagName("*");
+console.log(el); // HTMLCollection(11) [html, head, meta, title, script, script, script, body, script, script, script]
+console.log(all.length); // 11
+console.log(typeof all); // undefined
+for(var i=0;i<el.length;i++){
+    console.log(el[i]);
+}
+```
+
+### document.getElementsByClassName()
+
+根据元素的`class`属性值查询一组元素节点对象
+
+`getElementsByClassName()`可以根据`class`属性值获取一组元素节点对象，但是该方法不支持IE8及以下的浏览器
+
+```javascript
+var boxs = document.getElementsByClassName("box");
+console.log(boxs); // HTMLCollection(3) [div.box, div.box, div.box]
+console.log(boxs.length); // 3
+console.log(typeof boxs); // object
+```
+
+### document.querySelector()
+
+需要一个选择器的字符串作为参数，可以根据一个CSS选择器来查询一个元素节点对象
+
+虽然IE8中没有`getElementsByClassName()`但是可以使用`querySelector()`代替
+
+使用该方法总会返回唯一的一个元素，如果满足条件的元素有多个，那么它只会返回第一个
+
+```javascript
+var div = document.querySelector(".box div");
+console.log(div.innerHTML); // I'm first div.
+boxs = document.querySelector(".box");
+console.log(boxs); 
+// <div class="box">
+// 		<div>I'm first div.</div>
+// </div>
+```
+
+### document.querySelectorAll()
+
+该方法和`querySelector()`用法类似，不的是它会将符合条件的元素封装到一个数组中返回
+
+即使符合条件的元素只有一个，它也会返回数组
+
+```javascript
+boxs = document.querySelectorAll(".box");
+console.log(boxs); // NodeList(3) [div.box, div.box, div.box]
+console.log(boxs.length); //3
+```
+
+
+
+## 8、DOM增删改
+
+![image-20210804215312180](https://i.loli.net/2021/08/04/Y4M79fLcsUFOHv1.png)
+
+### document.createElement()
+
+可以用于创建一个元素节点对象，它需要一个标签名作为参数，将会根据该标签名创建元素节点对象，并将创建好的对象作为返回值返回
+
+### document.createTextNode()
+
+可以用来创建一个文本节点对象，它需要一个文本内容作为参数，将会根据该内容创建文本节点，并将新的节点返回
+
+### appendChild()
+
+向一个父节点中添加一个新的子节点，用法：`父节点.appendChild(子节点);`
+
+### insertBefore()
+
+可以在指定的子节点前插入新的子节点，语法：`父节点.insertBefore(新节点, 旧节点);`
+
+### replaceChild()
+
+可以使用指定的子节点替换已有的子节点，语法：`父节点.replaceChild(新节点, 旧节点);`
+
+### removeChild()
+
+可以删除一个子节点，语法：`父节点.removeChild(子节点);`、`子节点.parentNode.removeChild(子节点);`
+
+```javascript
+// 创建一个"广州"节点,添加到#city下
+var city = document.getElementById("city");
+myClick("btn01",function(){
+    // 创建元素节点
+    var li = document.createElement("li");
+    // 创建文本节点
+    var gz = document.createTextNode("广州");
+    // 将文本节点添加到元素节点中
+    li.appendChild(gz);
+    // 将元素节点添加至#city下
+    city.appendChild(li);
+});
+// 将"广州"节点插入到#bj前面	
+var bj = document.getElementById("bj");
+myClick("btn02",function(){
+    var li = document.createElement("li");
+    var gz = document.createTextNode("广州");
+    li.appendChild(gz);
+    // 将元素节点插入到#bj前面
+    city.insertBefore(li,bj);
+});
+// 使用"广州"节点替换#bj节点
+myClick("btn03",function(){
+    var li = document.createElement("li");
+    var gz = document.createTextNode("广州");
+    li.appendChild(gz);
+    // 将元素节点替换#bj节点
+    city.replaceChild(li,bj);
+});
+// 删除#bj节点
+myClick("btn04",function(){
+    // 将元素节点替换#bj节点
+    // city.removeChild(bj);
+    // 更常用，不需要知道父节点是什么	
+    bj.parentNode.removeChild(bj);
+});
+// 使用innerHTML将"广州"节点添加到#city下
+myClick("btn07",function(){
+    // 使用innerHTML也可以完成DOM的增删改的相关操作
+    // city.innerHTML += "<li>广州</li>";
+    // 不过这种方式会先删除再替换，耗费性能，所以一般我们会两种方式结合使用
+    var li = document.createElement("li");
+    li.innerHTML = "广州";
+    city.appendChild(li);
+});
+```
+
