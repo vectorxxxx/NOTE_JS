@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+		<style type="text/css">
+			#areaDiv {
+				border: 1px solid black;
+				width: 300px;
+				height: 50px;
+				margin-bottom: 10px;
+			}
+
+			#showMsg {
+				border: 1px solid black;
+				width: 300px;
+				height: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var areaDiv = document.getElementById("areaDiv");
+				var showMsg = document.getElementById("showMsg");
+				// 绑定鼠标移动事件
+				areaDiv.onmousemove = function(event) {
+					// console.log(event); // IE8：undefined
+					// clientX可以获取鼠标指针的水平坐标
+					// cilentY可以获取鼠标指针的垂直坐标
+					// var x;
+					// var y;
+					// if (event) {
+					// 	x = event.clientX;
+					// 	y = event.clientY;
+					// }
+					// else{
+					// 	// 在IE8中，响应函数被触发时，浏览器不会传递事件对象
+					// 	// 在IE8及以下的浏览器中，是将事件对象作为`window`对象的属性保存的
+					// 	x = window.event.clientX;
+					// 	y = window.event.clientY;
+					// } 
+					// if (!event) {
+					// 	event = window.event;
+					// }
+					event = event || window.event;
+					var x = event.clientX;
+					var y = event.clientY;
+					showMsg.innerHTML = "x = " + x + ", y = " + y;
+				}
+			};
+		</script>
+	</head>
+	<body>
+
+		<div id="areaDiv"></div>
+		<div id="showMsg"></div>
+
+	</body>
+</html>

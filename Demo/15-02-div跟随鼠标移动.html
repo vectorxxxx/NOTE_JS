@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>div跟随鼠标移动</title>
+		<style type="text/css">
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				/* 开启定位 */
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var box1 = document.getElementById("box1");
+				// 绑定鼠标移动事件
+				document.onmousemove = function(event) {
+					// 兼容性写法
+					event = event || window.event;
+					// clientX和clientY用于获取鼠标在当前的可见窗口的坐标div的偏移量，是相对于整个页面的
+					var left = event.clientX;
+					var top = event.clientY;
+					// pageX和pageY可以获取鼠标相对于当前页面的坐标，但是这个两个属性在IE8中不支持，所以如果需要兼容IE8，则不要使用
+					// var left = event.pageX;
+					// var top = event.pageY;
+					// div随鼠标移动，注意style属性是有单位的
+					// box1.style.left = (left - box1.clientWidth / 2) + "px";
+					// box1.style.top = (top - box1.clientHeight / 2) + "px";
+					// 利用scrollTop消除div与鼠标原点的垂直距离差
+					// box1.style.left = (left - box1.clientWidth / 2) + "px";
+					// box1.style.top = (document.body.scrollTop + top - box1.clientHeight / 2) + "px";
+					box1.style.left = (document.documentElement.scrollLeft + left - box1.clientWidth / 2) + "px";
+					box1.style.top = (document.documentElement.scrollTop + top - box1.clientHeight / 2) + "px";
+				};
+			};
+		</script>
+	</head>
+	<body style="height:1000px;width:2000px">
+		<div id="box1"></div>
+	</body>
+</html>
