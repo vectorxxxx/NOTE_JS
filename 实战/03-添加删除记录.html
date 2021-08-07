@@ -27,6 +27,10 @@
 				var aList = document.getElementsByTagName("a");
 				for (var i = 0; i < aList.length; i++) {
 					aList[i].onclick = delRow;
+					// aList[i].onclick = function() {
+					// 	alert(i);
+					// 	return false;
+					// };
 				}
 
 				// 2、添加

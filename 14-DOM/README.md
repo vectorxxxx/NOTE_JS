@@ -764,7 +764,7 @@ myClick("btn07",function(){
 
 
 
-### 9、增删练习
+## 9、增删练习
 
 准备
 
@@ -949,3 +949,475 @@ document.getElementById("addEmpButton").onclick = function() {
 }
 ```
 
+### a的索引问题
+
+上述中，我们为每个a都添加了单击响应函数，使用了`this`获取遍历中的a元素，通过`this.parentNode.parentNode`获取了 tr 元素，如果这里改成`aList[i].parentNode.parentNode`，能够拿到 tr 元素吗？
+
+看起来好像毫无悬念，但实际上是拿不到的，这是为什么呢？
+
+我们可以改造下 for 循环中 a 元素的单击相应函数，打印下每次拿到的 i
+
+```javascript
+for (var i = 0; i < aList.length; i++) {
+    aList[i].onclick = function(){
+        alert(i);
+        return false;
+    };
+}
+```
+
+![image-20210806192603271](https://i.loli.net/2021/08/06/Fmon6jlH4q8hQiv.png)
+
+会发现，每次打印的结果都是3，而 aList 的长度为3最大索引是2
+
+原因其实很简单，因为单击相应函数的执行是晚于 for 循环的执行的。也就是说，我们在点击 Delete 前，for 循环就已经执行完毕了。即当 i=2 的循环执行之后，会执行 i++，此时 i=3，这是循环条件判断 i ≮ 2，即不满足循环条件，for 循环退出。所以每次拿到的都是 for 循环执行完毕之后的 i，因此通过 aList[i] 的方式是无法取得对应的 a 元素的
+
+**总结：** for 循环会在页面加载完成之后立即执行，而响应函数会在超链接被点击时才执行当响应函数执行时，for 循环早已执行完毕
+
+
+
+## 10、操作内联样式
+
+### 修改元素内联样式
+
+通过JS修改元素的内联样式，语法：`元素.style.样式名 = 样式值`
+
+```javascript
+box1.style.height = "200px";
+box1.style.width = "200px";
+```
+
+注意：如果CSS的样式名中含有一，这种名称在JS中是不合法的，比如`background-color`
+
+需要将这种样式名修改为驼峰命名法，去掉`-`，然后将`-`后的字母大写
+
+```javascript
+// box1.style.background-color = "red"; // Uncaught SyntaxError: Invalid left-hand side in assignment
+box1.style.backgroundColor = "red";
+```
+
+在 w3school 手册中，可以查看到每个样式所对应的 JS 代码
+
+![image-20210806194738937](https://i.loli.net/2021/08/06/bcRK8VFLQ5fSOlj.png)
+
+![image-20210806194643089](https://i.loli.net/2021/08/06/7nUasCtqkbDgwxM.png)
+
+我们通过 style 属性设置的样式都是内联样式，而内联样式有较高的优先级，所以通过JS修改的样式往往会立即显示
+
+但是如果在样式中写了`!important`，则此时样式会有最高的优先级，即使通过JS也不能覆盖该样式，此时将会导致JS修改样式失效，所以尽量不要为样式添加`!important`
+
+我们给 `background-color`设置`!important`之后，通过 `box1.style.backgroundColor = "red";`设置的样式就“废”了
+
+```css
+background-color: yellow !important;
+```
+
+![操作内联样式](https://i.loli.net/2021/08/06/9uAOK8i1JtWfVY4.gif)
+
+### 读取元素内联样式
+
+通过 JS 读取元素的内联样式，语法：元素.style.样式名
+
+通过style属性设置和读取的都是内联样式，无法读取样式表中的样式
+
+```javascript
+alert(box1.style.height); // 
+box1.style.height = "200px";
+alert(box1.style.height); // 200px
+```
+
+![img](https://i.loli.net/2021/08/06/y6utzGF75bedpVQ.jpg)
+
+别急，耐心往下看
+
+### 读取元素样式
+
+获取元素的当前显示的样式，语法：`元素.currentStyle.样式名`
+
+它可以用来读取当前元素正在显示的样式，如果当前元素没有设置该样式，则获取它的默认值
+
+```javascript
+alert(box1.currentStyle.height); // 100px
+box1.style.height = "200px";
+alert(box1.currentStyle.height); // 200px
+```
+
+不过`currentstyle`只有IE浏览器支持，其他的浏览器都不支持。我们在 IE 中测试是可行的，在 Chrome 或 Edge 中报错的：`UncaughtTypeError: Cannot read property 'height' of undefined`
+
+![img](https://i.loli.net/2021/08/06/N7jGRhYzBolMnQ5.jpg)
+
+不过，在其他浏览器中可以使用`getComputedStyle()`，这个方法来获取元素当前的样式
+
+这个方法是`window`的方法，可以直接使用，需要两个参数
+
+- 第一个：要获取样式的元素
+- 第二个：可以传递一个伪元素，一般都传`null`
+
+该方法会返回一个对象，对象中封装了当前元素对应的样式
+
+可以通过`对象.样式名`来读取样式，如果获取的样式没有设置，则会获取到真实的值，而不是默认值
+
+比如：没有设置 width，它不会获取到 auto，而是一个长度
+
+但是该方法不支持IE8及以下的浏览器
+
+```javascript
+var obj = getComputedStyle(box1, null);
+alert(obj); // [object CSSStyleDeclaration]
+alert(obj.width); // 200px
+alert(obj.height); // 200px
+alert(obj.backgroundColor); // rgb(255, 0, 0)
+```
+
+那么问题来了，如果想要兼容IE8及以下的浏览器，就会陷入一个两难的境地，  该怎么办呢？
+
+![img](https://i.loli.net/2021/08/06/5El4riGYOwX27dP.jpg)
+
+通过`currentStyle`和`getComputedStyle()`读取到的样式都是只读的，不能修改，如果要修改必须通过`style`属性
+
+那么我就只能自己写个函数，来兼容所有浏览器
+
+```javascript
+// 自定义兼容所有浏览器获取元素样式的方法
+function getStyle(obj, name) {
+    // 判断是否有getComputedStyle方法
+    if (getComputedStyle) {
+        // 正常浏览器的方式
+        return getComputedStyle(obj, null)[name];
+    } else {
+        // IE的方式
+        return obj.currentStyle[name];
+    }
+}
+```
+
+**测试结果**
+
+Hbuilder内置浏览器
+
+![image-20210806204815473](https://i.loli.net/2021/08/06/PJ6KxF2CRUEjIq8.png)
+
+Chrome
+
+![image-20210806204840431](https://i.loli.net/2021/08/06/uvROB1ZPI3fCaxj.png)
+
+Edge
+
+![image-20210806204741700](https://i.loli.net/2021/08/06/tlJ4aE3usF7QNvO.png)
+
+IE11
+
+![image-20210806204937646](https://i.loli.net/2021/08/06/ZptIuNWGfTkDnbF.png)
+
+IE8
+
+![image-20210806204535471](https://i.loli.net/2021/08/06/psYWF3LdmOQCrUh.png)
+
+怎么 IE8 还是不行，提示`“getComputedStyle”未定义`？
+
+这是因为执行到 if 语句时，会先在 function 中找，找不到会在全局作用域中找，全局作用域中也找不到`getComputedStyle`，就会报错了
+
+那么怎么解决这个问题呢？
+
+我们先改造一下 function 代码，将`getComputedStyle`改成`window.getComputedStyle`
+
+```javascript
+function getStyle(obj, name) {
+    // 判断是否有getComputedStyle方法
+    if (window.getComputedStyle) {
+        // 正常浏览器的方式
+        return getComputedStyle(obj, null)[name];
+    } else {
+        // IE的方式
+        return obj.currentStyle[name];
+    }
+}
+```
+
+**效果**
+
+![image-20210806205500790](https://i.loli.net/2021/08/06/UK3YOW4pHvoRb1q.png)
+
+为什么呢？
+
+因为变量找不到会报错，而属性找不到返回的是`undefined`而不会报错，这样就可以利用`undefined != true`的特点，执行 else 中的代码
+
+同理，下面代码同样可以判断，只不过，会优先走`currentStyle`的方式，而我们希望的优先走`getComputedStyle`方法，所以不建议用
+
+```javascript
+function getStyle(obj, name) {
+    // 判断是否有currentStyle属性
+    if (obj.currentStyle) {
+        // IE的方式
+        return obj.currentStyle[name];
+    } else {
+        // 正常浏览器的方式
+        return getComputedStyle(obj, null)[name];
+    }
+}
+```
+
+那么上述代码有没有优化或者说简化的空间呢？当然，我们可以使用三元运算符对其进行精简
+
+```javascript
+function getStyle(obj, name) {
+    return window.getComputedStyle ? getComputedStyle(obj, null)[name] : obj.currentStyle[name];
+}
+```
+
+三元运算符更加简洁，if-else 的方式更加清晰，建议使用 if-else 的方式，不过本质上是一样的，看个人习惯
+
+
+
+## 11、其他样式相关的属性
+
+![image-20210806214629582](https://i.loli.net/2021/08/06/WC2ob7rpFlPDYZB.png)
+
+### clientwidth、clientHeight
+
+这两个属性可以获取元素的可见宽度和高度
+
+这些属性都是不带`px`的，返回都是一个数字，可以直接进行计算
+
+会获取元素宽度和高度，包括内容区和内边距
+
+这些属性都是只读的，不能修改（改只有一种方式，就是通过`元素.style.样式 = 样式值`）
+
+```javascript
+// #box1 {
+// 	width: 100px;
+// 	height: 100px;
+// 	background-color: red;
+// 	padding: 10px;
+// 	border: 10px solid yellow;
+// }
+alert(box1.clientHeight); // 120
+alert(box1.clientWidth); // 120
+```
+
+### offsetwidth、offsetHeight
+
+获取元素的整个的宽度和高度，包括内容区、内边距和边框
+
+```javascript
+// #box1 {
+// 	width: 100px;
+// 	height: 100px;
+// 	background-color: red;
+// 	padding: 10px;
+// 	border: 10px solid yellow;
+// }
+alert(box1.offsetHeight); // 140
+alert(box1.offsetWidth); // 140
+```
+
+### offsetParent
+
+可以用来获取当前元素的定位父元素
+
+会获取到离当前元素最近的开启了定位（只要`position`不是`sticky`）的祖先元素
+
+如果所有的祖先元素都没有开启定位，则返回`body`
+
+```javascript
+// <div id="box1"></div>
+alert(box1.offsetParent); // [object HTMLBodyElement]
+
+// <div id="box2">
+//     <div id="box1"></div>
+// </div>
+alert(box1.offsetParent); // [object HTMLBodyElement]
+
+//<div id="box3">
+//	<div id="box2">
+//		<div id="box1"></div>
+//	</div>
+//</div>
+alert(box1.offsetParent); // [object HTMLBodyElement]
+
+//<div id="box3" style="position: relative;">
+//	<div id="box2" style="position: relative;">
+//		<div id="box1"></div>
+//	</div>
+//</div>
+alert(box1.offsetParent); // [object HTMLDivElement]
+alert(box1.offsetParent.id); // box2
+
+//<div id="box3" style="position: relative;">
+//	<div id="box2">
+//		<div id="box1"></div>
+//	</div>
+//</div>
+alert(box1.offsetParent); // [object HTMLDivElement]
+alert(box1.offsetParent.id); // box3
+```
+
+### offsetLeft、offsetTop
+
+当前元素相对于其定位父元素的水平或垂直偏移量
+
+```javascript
+//<div id="box3">
+//	<div id="box2">
+//		<div id="box1"></div>
+//	</div>
+//</div>
+alert(box1.offsetLeft); // 8  浏览器的默认样式
+alert(box1.offsetTop); // 54
+
+//<div id="box3">
+//	<div id="box2" style="position: relative;">
+//		<div id="box1"></div>
+//	</div>
+//</div>
+alert(box1.offsetLeft); // 0
+alert(box1.offsetTop); // 0
+```
+
+![image-20210806215118948](https://i.loli.net/2021/08/06/BsWbShFaAutMG5C.png)
+
+### scrollHeight、scrollWidth
+
+可以获取元素整个滚动区域的宽度和高度
+
+```javascript
+// #box4 {
+// 	width: 200px;
+// 	height: 300px;
+// 	background-color: yellow;
+// 	overflow: auto;
+// }
+// #box5 {
+// 	width: 400px;
+// 	height: 600px;
+// 	background-color: #bfa;
+// }
+alert(box4.scrollHeight); // 600
+alert(box4.scrollWidth); // 400
+```
+
+### scrollLeft、scrollTop
+
+可以获取水平或垂直滚动条滚动的距离
+
+```javascript
+// #box4 {
+// 	width: 200px;
+// 	height: 300px;
+// 	background-color: yellow;
+// 	overflow: auto;
+// }
+// #box5 {
+// 	width: 400px;
+// 	height: 600px;
+// 	background-color: #bfa;
+// }
+alert(box4.scrollLeft); // 0/71.19999694824219/92/... 随着水平滚动条滚动而发生变化
+alert(box4.scrollTop); // 0/163.1999969482422/116/... 随着垂直滚动条滚动而发生变化
+```
+
+看这么一个问题，打印如下值，将水平和垂直滚动条滚动到底
+
+```javascript
+alert(box4.clientHeight + ", " + (box4.scrollHeight - box4.scrollTop)); // 283, 283.20001220703125
+alert(box4.clientWidth + ", " + (box4.scrollWidth - box4.scrollLeft)); // 183, 183.1999969482422
+```
+
+PS：我这里打印的结果存在小数点，不知为何
+
+- 当满足`scrollHeight - scrollTop == clientHeight`，说明垂直滚动条滚动到底了
+- 当满足`scrollWidth - scrollLeft == clientwidth`，说明水平滚动条滚动到底
+
+那么这个原理有什么用呢？
+
+~~爱到底到底，管我什么事~~ 有些网站注册时会有一个 ~~霸王条款~~ 用户协议，要确保用户阅读协议了，才允许注册。那问题来了，怎么确保用户阅读了协议呢？就是利用了上述原理，当滚动条拖至最底部时，就可以注册了。
+
+那么接下来，我们就做一个 ~~霸王条款~~ 用户协议
+
+**练习**
+
+HTML 代码
+
+```html
+<div id="outer">
+    <h3>亲爱的用户，欢迎注册本网站</h3>
+    <p id="info">
+        亲爱的用户，请仔细阅读以下协议，如果你不仔细阅读你就别注册
+        此处省略一万字。。。
+    </p>
+    <div id="checkDiv">
+        <input type="checkbox" name="checkInput" value="1" id="checkInput" disabled="disabled" />我已仔细阅读协议，一定遵守
+    </div>
+    <div id="submitDiv">
+        <input type="submit" id="submitInput" disabled="disabled" value="注册"/>
+    </div>
+</div>
+```
+
+CSS 代码
+
+```css
+#outer {
+    width: 500px;
+}
+
+#outer,
+h3,
+#checkDiv,
+#submitDiv,
+#submitInput {
+    margin: 10px auto;
+}
+
+#checkDiv {
+    width: 250px;
+}
+
+#submitInput {
+    display: block;
+}
+
+#info {
+    height: 600px;
+    overflow: auto;
+}
+```
+
+JS 代码
+
+```javascript
+// 为滚动条绑定事件，就是为有滚动条的元素绑定事件
+var info = document.getElementById("info");
+var checkInput = document.getElementById("checkInput");
+var submitInput = document.getElementById("submitInput");
+info.onscroll = function() {
+    // 当滚动条滚动到底时，启用并自动勾选协议，并启用注册按钮
+    if (parseInt(info.scrollHeight - info.scrollTop) == parseInt(info.clientHeight)) {
+        // 自动勾选协议
+        checkInput.disabled = false;
+        checkInput.checked = true;
+        // 启用注册按钮
+        submitInput.disabled = false;
+    }
+}
+// 为checkInput绑定勾选响应事件
+checkInput.onclick = function(ret) {
+    // 如果勾选了协议，则启用注册按钮，否则禁用注册按钮
+    if (!checkInput.checked) {
+        submitInput.disabled = true;
+    }
+    else{
+        submitInput.disabled = false;
+    }
+}
+// 为submit绑定单击响应函数
+submitInput.onclick = function(){
+    if(confirm("确认注册吗？")){
+        alert("注册成功");
+    }
+}
+```
+
+**效果**
+
+![协议注册](https://i.loli.net/2021/08/06/KEq4XPeBnOxSFUs.gif)

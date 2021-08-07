@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>操作内联样式</title>
+		<style type="text/css">
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				/* background-color: yellow !important; */
+			}
+		</style>
+		<script type="text/javascript">
+			// 自定义兼容所有浏览器获取元素样式的方法
+			function getStyle(obj, name) {
+				return window.getComputedStyle ? getComputedStyle(obj, null)[name] : obj.currentStyle[name];
+			}
+			// function getStyle(obj, name) {
+			// 	// 判断是否有getComputedStyle方法
+			// 	if (window.getComputedStyle) {
+			// 		// 正常浏览器的方式
+			// 		return getComputedStyle(obj, null)[name];
+			// 	} else {
+			// 		// IE的方式
+			// 		return obj.currentStyle[name];
+			// 	}
+			// }
+			// function getStyle(obj, name) {
+			//     // 判断是否有currentStyle属性
+			//     if (obj.currentStyle) {
+			//         // IE的方式
+			//         return obj.currentStyle[name];
+			//     } else {
+			//         // 正常浏览器的方式
+			//         return getComputedStyle(obj, null)[name];
+			//     }
+			// }
+			window.onload = function() {
+				// 为#btn绑定单击相应函数
+				document.getElementById("btn").onclick = function() {
+					var box1 = document.getElementById("box1");
+					// 修改#box1的宽和高
+					// alert(box1.style.height); // 
+					// alert(box1.currentStyle.height); // 100px
+					box1.style.height = "200px";
+					box1.style.width = "200px";
+					// 修改#box1的背景色
+					// box1.style.background-color = "red"; // Uncaught SyntaxError: Invalid left-hand side in assignment
+					box1.style.backgroundColor = "red";
+					// alert(box1.style.height); // 200px
+					// alert(box1.currentStyle.height); // 200px
+
+					// var obj = getComputedStyle(box1, null);
+					// alert(obj); // [object CSSStyleDeclaration]
+					// alert(obj.width); // 200px
+					// alert(obj.height); // 200px
+					// alert(obj.backgroundColor); // rgb(255, 0, 0)
+
+					// 自定义兼容所有浏览器获取元素样式的方法
+					alert(getStyle(box1, "height")); // 200px
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn">Click</button>
+		<br /><br />
+		<div id="box1"></div>
+	</body>
+</html>

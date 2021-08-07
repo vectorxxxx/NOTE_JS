@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>其他样式相关的属性</title>
+		<style type="text/css">
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				padding: 10px;
+				border: 10px solid yellow;
+			}
+
+			#box4 {
+				width: 200px;
+				height: 300px;
+				background-color: yellow;
+				overflow: auto;
+			}
+
+			#box5 {
+				width: 400px;
+				height: 600px;
+				background-color: #bfa;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				document.getElementById("btn").onclick = function() {
+					var box1 = document.getElementById("box1");
+					// #box1 {
+					// 	width: 100px;
+					// 	height: 100px;
+					// 	background-color: red;
+					// 	padding: 10px;
+					// 	border: 10px solid yellow;
+					// }
+					// alert(box1.clientHeight); // 100
+					// alert(box1.clientWidth); // 100
+
+					// #box1 {
+					// 	width: 100px;
+					// 	height: 100px;
+					// 	background-color: red;
+					// 	padding: 10px;
+					// 	border: 10px solid yellow;
+					// }
+					// alert(box1.offsetHeight); // 140
+					// alert(box1.offsetWidth); // 140
+
+					// <div id="box1"></div>
+					// alert(box1.offsetParent); // [object HTMLBodyElement]
+
+					// <div id="box2">
+					//     <div id="box1"></div>
+					// </div>
+					// alert(box1.offsetParent); // [object HTMLBodyElement]
+
+					//<div id="box3">
+					//	<div id="box2">
+					//		<div id="box1"></div>
+					//	</div>
+					//</div>
+					// alert(box1.offsetParent); // [object HTMLBodyElement]
+
+					//<div id="box3" style="position: relative;">
+					//	<div id="box2" style="position: relative;">
+					//		<div id="box1"></div>
+					//	</div>
+					//</div>
+					// alert(box1.offsetParent); // [object HTMLDivElement]
+					// alert(box1.offsetParent.id); // box2
+
+					//<div id="box3" style="position: relative;">
+					//	<div id="box2">
+					//		<div id="box1"></div>
+					//	</div>
+					//</div>
+					// alert(box1.offsetParent); // [object HTMLDivElement]
+					// alert(box1.offsetParent.id); // box3
+
+					//<div id="box3">
+					//	<div id="box2">
+					//		<div id="box1"></div>
+					//	</div>
+					//</div>
+					// alert(box1.offsetLeft); // 8
+					// alert(box1.offsetTop); // 54
+
+					//<div id="box3">
+					//	<div id="box2" style="position: relative;">
+					//		<div id="box1"></div>
+					//	</div>
+					//</div>
+					// alert(box1.offsetLeft); // 0
+					// alert(box1.offsetTop); // 0
+
+					// #box4 {
+					// 	width: 200px;
+					// 	height: 300px;
+					// 	background-color: yellow;
+					// 	overflow: auto;
+					// }
+					// #box5 {
+					// 	width: 400px;
+					// 	height: 600px;
+					// 	background-color: #bfa;
+					// }
+					// alert(box4.scrollHeight); // 600
+					// alert(box4.scrollWidth); // 400
+
+					// #box4 {
+					// 	width: 200px;
+					// 	height: 300px;
+					// 	background-color: yellow;
+					// 	overflow: auto;
+					// }
+					// #box5 {
+					// 	width: 400px;
+					// 	height: 600px;
+					// 	background-color: #bfa;
+					// }
+					// alert(box4.scrollLeft); // 0/71.19999694824219/92/... 随着水平滚动条滚动而发生变化
+					// alert(box4.scrollTop); // 0/163.1999969482422/116/... 随着垂直滚动条滚动而发生变化
+					
+						alert(box4.clientHeight + ", " + (box4.scrollHeight - box4.scrollTop)); // 283, 283.20001220703125
+						alert(box4.clientWidth + ", " + (box4.scrollWidth - box4.scrollLeft)); // 183, 183.1999969482422
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn">点我一下</button>
+		<br><br>
+
+		<div id="box4">
+			<div id="box5"></div>
+		</div>
+		<br><br>
+		<div id="box3">
+			<div id="box2" style="position: relative;">
+				<div id="box1"></div>
+			</div>
+		</div>
+
+	</body>
+</html>
