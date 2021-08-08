@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试IE8</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				var btn1 = document.getElementById("btn1");
+				var btn2 = document.getElementById("btn2");
+
+				btn1.onclick = function() {
+					alert(1);
+				}
+				btn2.onclick = function() {
+					alert(2);
+				}
+				// 设置btn1对鼠标按下相关的事件进行捕获
+				// 当调用一个元素的setCapture()方法以后，这个元素将会把下一次所有的鼠标按下相关的事件捕获到自身上
+				btn1.setCapture();
+			};
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn1">click1</button>
+		<button type="button" id="btn2">click2</button>
+	</body>
+</html>

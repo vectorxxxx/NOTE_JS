@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>拖拽</title>
+		<style type="text/css">
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+
+			#box2 {
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				position: absolute;
+				left: 300px;
+				top: 300px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var box1 = document.getElementById("box1");
+				// 1. 当鼠标在被拖拽元素上按下时，开始拖拽 `onmousedown`
+				box1.onmousedown = function(event) {
+					// 设置box1捕获所有鼠标按下的事件
+					// 只有IE支持，但是在火狐中调用时不会报错，而如果使用Chrome调用，会报错
+					box1.setCapture && box1.setCapture();
+					
+					event = event || window.event;
+					var boxLeft = event.clientX - box1.offsetLeft; // 鼠标水平坐标 - 元素水平偏移量 = 鼠标原点和元素原点水平距离
+					var boxTop = event.clientY - box1.offsetTop; // 鼠标垂直坐标 - 元素垂直偏移量 = 鼠标原点和元素原点垂直距离
+					// 2. 当鼠标移动时被拖拽元素跟随鼠标移动 `onmousemove`
+					document.onmousemove = function(event) {
+						event = event || window.event;
+						box1.style.left = event.clientX - boxLeft + "px";
+						box1.style.top = event.clientY - boxTop + "px";
+					};
+					// 3. 当鼠标松开时，被拖拽元素固定在当前位置 `onmouseup`
+					document.onmouseup = function(event) {
+						// 取消document的onmousemove事件
+						document.onmousemove = null;
+						// 取消document的onmouseup事件
+						document.onmouseup = null;
+						// 当鼠标松开时，取消对事件的捕获
+						box1.releaseCapture && box1.releaseCapture();
+					};
+					// 取消默认行为
+					return false;
+				};
+			};
+		</script>
+	</head>
+	<body style="width: 2000px; height: 1000px;">
+		我是body的内容
+		<div id="box1"></div>
+		<div id="box2"></div>
+	</body>
+</html>

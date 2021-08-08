@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件委派</title>
+		<script type="text/javascript">
+			// function clickFun(){
+			// 	alert("超链接");
+			// }
+			
+			window.onload = function(){
+				// 为每一个超链接都绑定一个单击响应函数
+				// 这里我们为每一个超链接都绑定了一个单击响应函数，这种操作比较麻烦
+				// 而且这些操作只能为已有的超链接设置事件，而新添加的超链接必须重新绑定
+				// var aList = document.getElementsByTagName("a");
+				// for(var i=0;i<aList.length;i++){
+				// 	aList[i].onclick = clickFun;
+				// }
+				
+				var btn = document.getElementById("btn");
+				var ulDiv = document.getElementById("ulDiv");
+				btn.onclick = function(){
+					var li = document.createElement("li");
+					li.innerHTML = "<a href=\"javascript:;\">add超链接</a>";
+					ulDiv.appendChild(li);
+				};
+				
+				ulDiv.onclick = function(event){
+					event = event || window.event;
+					// 如果触发事件的对象是我们期望的元素，则执行否则不执行
+					// alert(event.target); // 点击超链接外：[object HTMLLIElement]; 点击超链接：javascript:;
+					// if(event.target.className == "link"){
+					// 	alert("事件委派超链接");
+					// }
+					if(event.target.tagName == "A" || event.target.tagName == "a"){
+						alert("事件委派超链接");
+					}
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn">Add</button>
+		<ul id="ulDiv">
+			<li><a href="javascript:;" class="link hello">超链接1</a></li>
+			<li><a href="javascript:;" class="link">超链接2</a></li>
+			<li><a href="javascript:;" class="link">超链接3</a></li>
+		</ul>
+	</body>
+</html>

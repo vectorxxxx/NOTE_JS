@@ -1173,7 +1173,7 @@ function getStyle(obj, name) {
 
 ![image-20210806214629582](https://i.loli.net/2021/08/06/WC2ob7rpFlPDYZB.png)
 
-### clientwidth、clientHeight
+### clientWidth、clientHeight
 
 这两个属性可以获取元素的可见宽度和高度
 
@@ -1195,7 +1195,7 @@ alert(box1.clientHeight); // 120
 alert(box1.clientWidth); // 120
 ```
 
-### offsetwidth、offsetHeight
+### offsetWidth、offsetHeight
 
 获取元素的整个的宽度和高度，包括内容区、内边距和边框
 

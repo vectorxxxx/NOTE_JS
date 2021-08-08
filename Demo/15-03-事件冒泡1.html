@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件冒泡</title>
+		<style type="text/css">
+			#box1{
+				width:200px;
+				height:	200px;
+				background-color: #99FF99;
+			}
+			
+			#s1{
+				background-color: yellowgreen;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				document.getElementById("s1").onclick = function(event){
+					// alert("我是span"); // 我是span 我是div 我是body 我是HTML
+					alert("我是span"); // 我是span
+					// 兼容event
+					event = event || window.event;
+					event.cancelBubble = true;
+				};
+				document.getElementById("box1").onclick = function(){
+					alert("我是div"); // 我是div 我是body 我是HTML
+				};
+				document.body.onclick = function(){
+					alert("我是body"); // 我是body 我是HTML
+				};
+				document.documentElement.onclick = function(){
+					alert("我是HTML"); // 我是HTML
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<div id="box1">
+			我是div 
+			<span id="s1">
+				我是span
+			</span>
+		</div>
+	</body>
+</html>

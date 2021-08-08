@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件绑定</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				var btn = document.getElementById("btn");
+				// 为btn绑定一个单击响应函数
+				// btn.onclick = function() {
+				// 	alert(1);
+				// };
+				// 为btn绑定第二个响应函数
+				// btn.onclick = function() {
+				// 	alert(2);
+				// };
+
+				// btn.addEventListener("click", function(){
+				// 	alert(1); // 1
+				// }, false);
+				// btn.addEventListener("click", function(){
+				// 	alert(2); // 2
+				// }, false);
+				// btn.addEventListener("click", function(){
+				// 	alert(3); // 3
+				// }, false);
+
+				// btn.attachEvent("onclick", function() {
+				// 	alert(1); // 1
+				// });
+				// btn.attachEvent("onclick", function() {
+				// 	alert(2); // 2
+				// });
+				// btn.attachEvent("onclick", function() {
+				// 	alert(3); // 3
+				// });
+
+				// bind(btn, "click", function() {
+				// 	alert(1);
+				// });
+				bind(btn, "click", function() {
+					alert(this); // IE8: [object window]；非IE8：[object HTMLButtonElement]
+				});
+			};
+
+			// 定义一个函数，用来为指定元素绑定响应函数
+			// 参数：
+			// - obj 要绑定事件的对象
+			// - eventStr 事件的字符串
+			// - callback 回调函数
+			function bind(obj, eventStr, callback) {
+				if (obj.addEventListener) {
+					obj.addEventListener(eventStr, callback, false);
+				} else {
+					// this是谁由调用方式决定
+					// callback.call(obj)
+					obj.attachEvent("on" + eventStr, function(){
+						// 在匿名函数中调用回调函数
+						callback.call(obj);
+					});
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn">点我一下</button>
+	</body>
+</html>
