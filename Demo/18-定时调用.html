@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定时调用</title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var num = 1;
+				info = document.getElementById("info");
+				var timer = setInterval(function(){
+					info.innerHTML = num++;
+					if(num > 100){
+						clearInterval(timer);
+					}
+				}, 10);
+			}
+		</script>
+	</head>
+	<body>
+		<h1 id="info">1</h1>
+	</body>
+</html>

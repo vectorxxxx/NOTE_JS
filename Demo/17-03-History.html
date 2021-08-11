@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>History</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				document.getElementById("btn").onclick = function() {
+					// `length`属性，可以获取到当次访问的链接数量
+					// alert(history.length);
+					// 访问History页面：1
+					// 访问Test02页面并跳转至History页面：2
+					// 访问Test01页面并跳转至History页面：3
+					
+					// history.back();
+					
+					// history.forward();
+					
+					// history.go(2);
+					history.go(-2);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn">点我一下</button>
+		<h1>History</h1>
+		<a href="17-03-test01.html">Go to Test01</a>
+	</body>
+</html>

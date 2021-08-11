@@ -1042,7 +1042,7 @@ box1.style.height = "200px";
 alert(box1.currentStyle.height); // 200px
 ```
 
-不过`currentstyle`只有IE浏览器支持，其他的浏览器都不支持。我们在 IE 中测试是可行的，在 Chrome 或 Edge 中报错的：`UncaughtTypeError: Cannot read property 'height' of undefined`
+不过`currentstyle`只有 IE 浏览器支持，其他的浏览器都不支持。我们在 IE 中测试是可行的，在 Chrome 或 Edge 中报错的：`UncaughtTypeError: Cannot read property 'height' of undefined`
 
 ![img](https://i.loli.net/2021/08/06/N7jGRhYzBolMnQ5.jpg)
 

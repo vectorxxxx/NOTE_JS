@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Location</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				document.getElementById("btn").onclick = function() {
+					// alert(location); // http://127.0.0.1:8848/Demo/17-04-Location.html
+					
+					// location = "http://www.baidu.com";
+					// location = "17-03-History.html";
+					
+					// location.assign("http://www.baidu.com");
+					location.replace("17-03-History.html");
+					
+					// location.reload(); 
+					// location.reload(true);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn">点我一下</button>
+		<h1>Location</h1>
+		<a href="17-03-test01.html">Go to Test01</a><br/><br/>
+		<input type="name" name="name"/>
+	</body>
+</html>
