@@ -1,0 +1,43 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#box1 {
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	/* 开启定位 */
+	position: absolute;
+	left: 0;
+	top: 50px;
+}
+
+#box2 {
+	width: 100px;
+	height: 100px;
+	background-color: yellow;
+	/* 开启定位 */
+	position: absolute;
+	left: 0;
+	top: 200px;
+}
+
+#box3 {
+	width: 100px;
+	height: 100px;
+	background-color: green;
+	/* 开启定位 */
+	position: absolute;
+	left: 200px;
+	top: 50px;
+}
+
+#line {
+	width: 0;
+	height: 1000px;
+	border: 1px solid black;
+	position: absolute;
+	top: 0;
+	left: 800px;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定时图片切换</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				var btnStart = document.getElementById("btnStart");
+				var btnEnd = document.getElementById("btnEnd");
+				var img = document.getElementById("img");
+				// 设置轮播图片数组
+				var imgArr = ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg"];
+				// 设置轮播图片索引
+				var index = 0;
+				// 为开始按钮绑定单击响应函数
+				var timer;
+				btnStart.onclick = function() {
+					// 目前，我们每点击一次按钮，就会开启一个定时器，点击多次就会开启多个定时器
+					// 这就导致图片的切换速度过快，并且我们只能关闭最后一次开启的定时器
+					// 在开启定时器之前，需要将当前元素上的其他定时器关闭
+					// 清除上一个定时器
+					clearInterval(timer);
+					// 设置定时器
+					timer = setInterval(function() {
+						// 切换图片
+						img.src = imgArr[index++];
+						// 判断索引是否超过最大索引
+						index %= imgArr.length;
+					}, 500);
+				};
+				// 为结束按钮绑定单击响应函数
+				btnEnd.onclick = function() {
+					// clearInterval()可以接收任意参数
+					// 如果参数是一个有效的定时器的标识，则停止对应的定时器
+					// 如果参数不是一个有效的标识，则什么也不做
+					// 即使没有点开始，timer为undefined也不会报错，可以放心大胆的去使用
+					clearInterval(timer);
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<img src="img/1.jpg" id="img" /><br>
+		<button type="button" id="btnStart">开始</button>
+		<button type="button" id="btnEnd">结束</button>
+	</body>
+</html>

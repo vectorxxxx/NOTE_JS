@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>延时调用</title>
+		<script type="text/javascript">
+			var num = 1;
+			// var timer = setInterval(function(){
+			// 	console.log(num++);
+			// }, 1000);
+			var timer = setTimeout(function(){
+				console.log(num++);
+			}, 1000);
+			clearTimeout(timer);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

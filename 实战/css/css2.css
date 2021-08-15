@@ -1,0 +1,64 @@
+/* 去除浏览器默认样式 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+a{
+	text-decoration: none;
+}
+
+/* 总体布局 */
+#outer {
+	width: 500px;
+	height: 332px;
+	margin: 100px auto;
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, .2);
+	position: relative;
+	overflow: hidden;
+}
+
+/* 轮播图片 */
+#pic-list {
+	width: 2550px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	/* 添加过渡效果 */
+	/* transition: left 0.3s; */
+}
+
+#pic-list li {
+	float: left;
+	margin-right: 10px;
+}
+
+/* 轮播按钮 */
+#nav-list {
+	position: absolute;
+	left: 187.5px;
+	bottom: 10px;
+}
+
+#nav-list li{
+	float: left;
+	width: 15px;
+	height: 15px;
+	background-color: red;
+	opacity: 0.5;
+	margin: 0 5px;
+}
+
+#nav-list a:hover{
+	background-color: black;
+}
+
+#nav-list li a{
+	display: block;
+	height: 100%;
+	line-height: 100%;
+}

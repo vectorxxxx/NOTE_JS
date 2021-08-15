@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>类的操作</title>
+		<style type="text/css">
+			.b1 {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+
+			.b2 {
+				width: 200px;
+				height: 200px;
+				background-color: yellow;
+			}
+
+			.b3 {
+				position: absolute;
+				left: 100px;
+			}
+		</style>
+		<script src="js/tools.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var btn1 = document.getElementById("btn1");
+				var btn2 = document.getElementById("btn2");
+				var btn3 = document.getElementById("btn3");
+				var btn4 = document.getElementById("btn4");
+				var box1 = document.getElementById("box1");
+				btn1.onclick = function() {
+					// box1.style.width = "200px";
+					// box1.style.height = "200px";
+					// box1.style.backgroundColor = "yellow";
+					box1.className = "b2";
+				};
+				btn2.onclick = function() {
+					addClass(box1, "b3");
+				};
+				btn3.onclick = function() {
+					removeClass(box1, "b3");
+				};
+				btn4.onclick = function() {
+					toggleClass(box1, "b3");
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn1">点击按钮修改box1样式</button>
+		<button type="button" id="btn2">点击按钮添加box1样式</button>
+		<button type="button" id="btn3">点击按钮删除box1样式</button>
+		<button type="button" id="btn4">点击按钮切换box1样式</button>
+		<br><br>
+		<div id="box1" class="b1"></div>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JSON</title>
+		<script type="text/javascript">
+			var obj = {
+				"name": "孙悟空",
+				"age": 1000,
+				"gender": "男"
+			};
+			console.log(typeof obj); // object
+			var jsonObjStr = '{"name": "孙悟空","age": 1000,"gender": "男"}';
+			console.log(typeof jsonObjStr); // string
+			var jsonArrStr = '[1,2,3,"hello", true]';
+			console.log(typeof jsonArrStr); // string
+
+			// json对象可以包含json数组
+			var obj1 = '{"arr":[1,2,3]}';
+			// json数组可以包含json对象
+			var obj2 = '[{"name": "孙悟空","age": 1000,"gender": "男"},{"name": "孙悟空","age": 1000,"gender": "男"}]';
+
+			var jsonObj = JSON.parse(jsonObjStr);
+			console.log(typeof jsonObj); // object
+			console.log(jsonObj); // { name: "孙悟空", age: 1000, gender: "男" }
+			console.log(jsonObj.name); // 孙悟空
+			console.log(jsonObj.age); // 1000
+			console.log(jsonObj.gender); // 男
+
+			var jsonArr = JSON.parse(jsonArrStr);
+			console.log(typeof jsonArr); // object
+			console.log(jsonArr); // (5) [ 1, 2, 3, "hello", true ]
+			console.log(jsonArr[0]); // 1
+			console.log(jsonArr[3]); // hello
+			console.log(jsonArr[4]); // true
+
+			var obj2 = {
+				name: "猪八戒",
+				age: 2000,
+				gender: "男"
+			};
+			var obj2JSONStr = JSON.stringify(obj2);
+			console.log(typeof obj2JSONStr); // string
+			console.log(obj2JSONStr); // {"name":"猪八戒","age":2000,"gender":"男"}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>二级菜单</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+			}
+
+			a,
+			img {
+				border: 0;
+				text-decoration: none;
+			}
+
+			body {
+				font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/sdmenu.css" />
+	</head>
+	<body>
+		<div id="my_menu" class="sdmenu">
+			<div>
+				<span class="menuSpan">在线工具</span>
+				<a href="#">图像优化</a>
+				<a href="#">收藏夹图标生成器</a>
+				<a href="#">邮件</a>
+				<a href="#">htaccess密码</a>
+				<a href="#">梯度图像</a>
+				<a href="#">按钮生成器</a>
+			</div>
+			<div class="collapsed">
+				<span class="menuSpan">支持我们</span>
+				<a href="#">推荐我们</a>
+				<a href="#">链接我们</a>
+				<a href="#">网络资源</a>
+			</div>
+			<div class="collapsed">
+				<span class="menuSpan">合作伙伴</span>
+				<a href="#">JavaScript工具包</a>
+				<a href="#">CSS驱动</a>
+				<a href="#">CodingForums</a>
+				<a href="#">CSS例子</a>
+			</div>
+			<div class="collapsed">
+				<span class="menuSpan">测试电流</span>
+				<a href="#">Current or not</a>
+				<a href="#">Current or not</a>
+				<a href="#">Current or not</a>
+				<a href="#">Current or not</a>
+			</div>
+		</div>
+		<script src="js/tools.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 为兼容IE8，用querySelectorAll
+			var menuSpan = document.querySelectorAll(".menuSpan");
+			var myMenu = document.getElementById("my_menu");
+			var thisNode;
+			// var siblingNode = myMenu.children;
+			// for (var i = 0; i < menuSpan.length; i++) {
+			// 	// 一级菜单绑定单击响应函数
+			// 	menuSpan[i].onclick = function() {
+			// 		thisNode = this.parentNode;
+			// 		// 切换collapsed的class属性
+			// 		toggleClass(thisNode, "collapsed");
+			// 		// 打开菜单以后，应该关闭之前打开的菜单
+			// 		for(var i=0;i<siblingNode.length;i++){
+			// 			if(siblingNode[i] != thisNode && !hasClass(siblingNode[i], "collapsed")){
+			// 				addClass(siblingNode[i], "collapsed");
+			// 			}
+			// 		}
+			// 	};
+			// }
+
+			// 定义一个变量，来保存当前打开的菜单
+			var openNode = menuSpan[0].parentNode;
+			// for (var i = 0; i < menuSpan.length; i++) {
+			// 	menuSpan[i].onclick = function() {
+			// 		thisNode = this.parentNode;
+			// 		toggleClass(thisNode, "collapsed");
+			// 		if (openNode != thisNode) {
+			// 			addClass(openNode, "collapsed");
+			// 		}
+			// 		openNode = thisNode;
+			// 	};
+			// }
+
+			var beginHeight;
+			var endHeight;
+			// for (var i = 0; i < menuSpan.length; i++) {
+			// 	menuSpan[i].onclick = function() {
+			// 		thisNode = this.parentNode;
+			// 		// 切换前高度
+			// 		beginHeight = thisNode.offsetHeight;
+			// 		// 切换
+			// 		toggleClass(thisNode, "collapsed");
+			// 		// 切换后高度
+			// 		endHeight = thisNode.offsetHeight;
+			// 		// 动画执行前内联高度
+			// 		thisNode.style.height = beginHeight + "px";
+			// 		// 设置动画效果
+			// 		move(thisNode, "height", endHeight, 30, function() {
+			// 			// 动画执行后内联高度
+			// 			thisNode.style.height = "";
+			// 		});
+			// 		// 关闭其他div
+			// 		if (openNode != thisNode && !hasClass(openNode, "collapsed")) {
+			// 			// 为了可以统一处理动画过渡效果，我们希望在这将addClass改为toggleClass
+			// 			// addClass(openNode, "collapsed");
+			// 			// 此处toggleClass()不需要有移除的功能
+			// 			toggleClass(openNode, "collapsed");
+			// 		}
+			// 		openNode = thisNode;
+			// 	};
+			// }
+
+			for (var i = 0; i < menuSpan.length; i++) {
+				menuSpan[i].onclick = function() {
+					thisNode = this.parentNode;
+					// 切换
+					toggleMenu(thisNode);
+					// 关闭其他div
+					if (openNode != thisNode && !hasClass(openNode, "collapsed")) {
+						toggleMenu(openNode);
+					}
+					openNode = thisNode;
+				};
+			}
+
+			// 带有动画效果的折叠和展开动作
+			function toggleMenu(obj) {
+				// 切换前高度
+				beginHeight = obj.offsetHeight;
+				// 切换
+				toggleClass(obj, "collapsed");
+				// 切换后高度
+				endHeight = obj.offsetHeight;
+				// 动画执行前内联高度
+				obj.style.height = beginHeight + "px";
+				// 设置动画效果
+				move(obj, "height", endHeight, 30, function() {
+					// 动画执行后内联高度
+					obj.style.height = "";
+				});
+			}
+		</script>
+	</body>
+</html>

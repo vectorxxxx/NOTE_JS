@@ -1066,7 +1066,7 @@ var obj = getComputedStyle(box1, null);
 alert(obj); // [object CSSStyleDeclaration]
 alert(obj.width); // 200px
 alert(obj.height); // 200px
-alert(obj.backgroundColor); // rgb(255, 0, 0)
+alert(obj.backgroundColor); // rgb(2  55, 0, 0)
 ```
 
 那么问题来了，如果想要兼容IE8及以下的浏览器，就会陷入一个两难的境地，  该怎么办呢？

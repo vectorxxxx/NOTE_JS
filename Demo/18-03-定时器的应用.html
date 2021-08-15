@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定时器的应用</title>
+		<link rel="stylesheet" type="text/css" href="css/css3.css"/>
+		<script src="js/tools.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var timer;
+				var speed = 19;
+				var btn1 = document.getElementById("btn1");
+				var btn2 = document.getElementById("btn2");
+				var btn3 = document.getElementById("btn3");
+				var box1 = document.getElementById("box1");
+				var box2 = document.getElementById("box2");
+				var box3 = document.getElementById("box3");
+				btn1.onclick = function() {
+					move(box1, "left", 800, speed);
+				};
+				btn2.onclick = function() {
+					move(box1, "left", 0, speed);
+				};
+				btn3.onclick = function() {
+					move(box2, "top", 500, speed);
+				};
+				btn4.onclick = function() {
+					move(box3, "height", 500, speed, function(){
+						move(box3, "width", 500, speed, function(){
+							move(box3, "height", 100, speed, function(){
+								move(box3, "width", 100, speed, function(){
+									
+								});
+							});
+						});
+					});
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<button type="button" id="btn1">点击按钮box1向右移动</button>
+		<button type="button" id="btn2">点击按钮box1向左移动</button>
+		<button type="button" id="btn3">点击按钮box2执行动画</button>
+		<button type="button" id="btn4">点击按钮box3执行动画</button>
+		<br><br>
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<div id="box3"></div>
+		<div id="line"></div>
+	</body>
+</html>
